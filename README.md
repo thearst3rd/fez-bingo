@@ -22,14 +22,14 @@ Enjoy!
 1. Go to https://bingosync.com
 2. In the "New Room" section, create a room name, password, and give yourself a nickname
 3. For "Game", select "Custom (Advanced)", and for "Variant", select "SRL v5"
-4. Open [fez-bingosync.json](fez-bingosync.json), copy the entire contents of that file, and paste it into the "Board" section on Bingosync
+4. Open [fez-bingosync.json](https://raw.githubusercontent.com/thearst3rd/fez-bingo/main/fez-bingosync.json), copy the entire contents of that file, and paste it into the "Board" section on Bingosync
 5. Ensure "Mode" is "Non-Lockout"
 6. Set the other settings to your preference and make the room
 7. When all runners have joined and are ready, the game can begin
 
 ## Example Games
 
-A few games played by me and Jokertyf can be found here:
+A few games played by Jokertyf and I can be found here:
 
 * https://www.twitch.tv/videos/1452319274
 * https://www.twitch.tv/videos/1452319276
