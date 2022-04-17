@@ -42,7 +42,7 @@ Enjoy!
 
 ## How To Play
 
-1. Go to https://bingosync.com
+1. Go to [https://bingosync.com](https://bingosync.com)
 2. In the "New Room" section, create a room name, password, and give yourself a nickname
 3. For the settings, select:
 	* "Game" = "Custom (Advanced)"
@@ -56,6 +56,6 @@ Enjoy!
 
 A few games played by Jokertyf and I can be found here:
 
-* https://youtu.be/DqVuff4dB9I
-* https://www.twitch.tv/videos/1452319274
-* https://www.twitch.tv/videos/1452319276
+* [https://youtu.be/DqVuff4dB9I](https://youtu.be/DqVuff4dB9I)
+* [https://www.twitch.tv/videos/1452319274](https://www.twitch.tv/videos/1452319274)
+* [https://www.twitch.tv/videos/1452319276](https://www.twitch.tv/videos/1452319276)
