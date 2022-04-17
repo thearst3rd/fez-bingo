@@ -1,37 +1,41 @@
-## Welcome to GitHub Pages
+# FEZ Bingo
 
-You can use the [editor on GitHub](https://github.com/thearst3rd/fez-bingo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This repository hosts the rules for playing bingo with the game [FEZ](http://www.fezgame.com/). The rules are in a format that can be understood by [Bingosync](https://bingosync.com), so games can be synced up online.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This bingo still needs some tweaking and balancing, so suggestions are welcome!
 
-### Markdown
+Enjoy!
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<div id="Generator">
+	<input id="generate-button" type="button" value="Generate New Board"/>
+	<textarea id="generate-output" placeholder="Generated board" cols="50" rows="5"></textarea>
+</div>
 
-```markdown
-Syntax highlighted code block
+## The Rules
 
-# Header 1
-## Header 2
-### Header 3
+* The bingo game begins on starting a new game in Speedrun mode, at which point the runners should reveal the bingo card
+* The bingo game ends when one runner fills in a row, column, or diagonal (beating the game is not required)
+* Any square that says "do not X" may be marked completed at the start, then unmarked when a player has done that thing
+* Most normal rules of any% apply, specifically:
+	* System clock manipulation is banned
+	* Cube duplication is banned
+	* Reset manipulation is banned
+	* Save state manipulation is banned
 
-- Bulleted
-- List
+## How To Play
 
-1. Numbered
-2. List
+1. Go to https://bingosync.com
+2. In the "New Room" section, create a room name, password, and give yourself a nickname
+3. For "Game", select "Custom (Advanced)", and for "Variant", select "SRL v5"
+4. Open [fez-bingosync.json](https://raw.githubusercontent.com/thearst3rd/fez-bingo/main/fez-bingosync.json), copy the entire contents of that file, and paste it into the "Board" section on Bingosync
+5. Ensure "Mode" is "Non-Lockout"
+6. Set the other settings to your preference and make the room
+7. When all runners have joined and are ready, the game can begin
 
-**Bold** and _Italic_ and `Code` text
+## Example Games
 
-[Link](url) and ![Image](src)
-```
+A few games played by Jokertyf and I can be found here:
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/thearst3rd/fez-bingo/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+* https://youtu.be/DqVuff4dB9I
+* https://www.twitch.tv/videos/1452319274
+* https://www.twitch.tv/videos/1452319276
