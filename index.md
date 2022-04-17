@@ -8,8 +8,10 @@ Enjoy!
 
 <input id="generate-button" type="button" value="Generate New Board"/>
 <textarea id="output-textarea" placeholder="Generated board" cols="50" rows="5"></textarea>
-<input id="copy-button" type="button" value="Copy to Clipboard"/>
-<p id="copied-text" style="visibility: hidden">Copied!</p>
+<div>
+	<input id="copy-button" type="button" value="Copy to Clipboard"/>
+	<p id="copied-text" style="visibility: hidden">Copied!</p>
+</div>
 <script>
 	const generateButton = document.getElementById("generate-button")
 	const outputTextarea = document.getElementById("output-textarea")
