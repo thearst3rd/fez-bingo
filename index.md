@@ -1,5 +1,3 @@
-# FEZ Bingo
-
 This site hosts the rules for playing bingo with the game [FEZ](http://www.fezgame.com/). The rules are in a format that can be understood by [Bingosync](https://bingosync.com), so games can be synced up online.
 
 This bingo still needs some tweaking and balancing, so suggestions are welcome!
