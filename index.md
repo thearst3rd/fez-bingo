@@ -1,15 +1,24 @@
 # FEZ Bingo
 
-This repository hosts the rules for playing bingo with the game [FEZ](http://www.fezgame.com/). The rules are in a format that can be understood by [Bingosync](https://bingosync.com), so games can be synced up online.
+This site hosts the rules for playing bingo with the game [FEZ](http://www.fezgame.com/). The rules are in a format that can be understood by [Bingosync](https://bingosync.com), so games can be synced up online.
 
 This bingo still needs some tweaking and balancing, so suggestions are welcome!
 
 Enjoy!
 
-<div id="Generator">
-	<input id="generate-button" type="button" value="Generate New Board"/>
-	<textarea id="generate-output" placeholder="Generated board" cols="50" rows="5"></textarea>
-</div>
+## The Generator
+
+<input id="generate-button" type="button" value="Generate New Board"/>
+<textarea id="output-textarea" placeholder="Generated board" cols="50" rows="5"></textarea>
+<input id="">
+<script>
+	const generateButton = document.getElementById("generate-button")
+	const outputTextarea = document.getElementById("output-textarea")
+	generateButton.onclick = function()
+	{
+		outputTextarea.value = "fake board"
+	}
+</script>
 
 ## The Rules
 
@@ -26,11 +35,13 @@ Enjoy!
 
 1. Go to https://bingosync.com
 2. In the "New Room" section, create a room name, password, and give yourself a nickname
-3. For "Game", select "Custom (Advanced)", and for "Variant", select "SRL v5"
-4. Open [fez-bingosync.json](https://raw.githubusercontent.com/thearst3rd/fez-bingo/main/fez-bingosync.json), copy the entire contents of that file, and paste it into the "Board" section on Bingosync
-5. Ensure "Mode" is "Non-Lockout"
-6. Set the other settings to your preference and make the room
-7. When all runners have joined and are ready, the game can begin
+3. For the settings, select:
+	* "Game" = "Custom (Advanced)"
+	* "Variant" = "Fixed Board"
+	* "Mode" = "Non-Lockout"
+4. In the above generator, press "Generate New Board" and copy the output into "Board" on Bingosync
+5. Set the other settings to your preference and make the room
+6. When all runners have joined and are ready, the game can begin
 
 ## Example Games
 
