@@ -10,13 +10,22 @@ Enjoy!
 
 <input id="generate-button" type="button" value="Generate New Board"/>
 <textarea id="output-textarea" placeholder="Generated board" cols="50" rows="5"></textarea>
-<input id="">
+<input id="copy-button" type="button" value="Copy to Clipboard"/>
+<p id="copied-text" style="visibility: hidden">Copied!</p>
 <script>
 	const generateButton = document.getElementById("generate-button")
 	const outputTextarea = document.getElementById("output-textarea")
+	const copyButton = document.getElementById("copy-button")
+	const copiedText = document.getElementById("copied-text")
 	generateButton.onclick = function()
 	{
-		outputTextarea.value = "fake board"
+		outputTextarea.value = "fake board " + Math.random()
+		copiedText.style.visibility = "hidden"
+	}
+	copyButton.onclick = function()
+	{
+		navigator.clipboard.writeText(outputTextarea.value)
+		copiedText.style.visibility = "visible"
 	}
 </script>
 
