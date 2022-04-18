@@ -6,7 +6,9 @@ Enjoy!
 
 ## The Generator
 
-<input id="seed-text" value="">Seed (blank for random)</input>
+<div>
+	<input id="seed-text" value="" placeholder="Seed (blank for random)"/>
+</div>
 <div>
 	<input id="generate-button" type="button" value="Generate New Board"/>
 </div>
