@@ -6,20 +6,50 @@ Enjoy!
 
 ## The Generator
 
-<input id="generate-button" type="button" value="Generate New Board"/>
-<textarea id="output-textarea" placeholder="Generated board" cols="50" rows="5"></textarea>
+<input id="seed-text" value="">Seed (blank for random)</input>
 <div>
-	<input id="copy-button" type="button" value="Copy to Clipboard"/>
-	<p id="copied-text" style="visibility: hidden">Copied!</p>
+	<input id="generate-button" type="button" value="Generate New Board"/>
 </div>
+<div>
+	<textarea id="output-textarea" placeholder="Generated board" cols="50" rows="5"></textarea>
+</div>
+<input id="copy-button" type="button" value="Copy to Clipboard"/>
+<p id="copied-text" style="visibility: hidden">Copied!</p>
+<script src="srl_generator_v5.js"></script>
+<script src="fez_bingolist_srlv5.js"></script>
 <script>
+	const seedText = document.getElementById("seed-text")
 	const generateButton = document.getElementById("generate-button")
 	const outputTextarea = document.getElementById("output-textarea")
 	const copyButton = document.getElementById("copy-button")
 	const copiedText = document.getElementById("copied-text")
 	generateButton.onclick = function()
 	{
-		outputTextarea.value = "fake board " + Math.random()
+		// Generate board
+		let opts = {}
+		if (seedText.value.length > 0)
+		{
+			let seed = parseInt(seedText.value)
+			if (!isNaN(seed))
+			{
+				seed = seed % 2147483648
+				seedText.value = seed
+				opts.seed = seed
+			}
+			else
+			{
+				console.log(seedText.value, "or", seed, "is not valid seed, ignoring")
+				seedText.value = ""
+			}
+		}
+		let newBoard = bingoGeneratorSrlv5(bingoListSrlv5, opts)
+		let json = []
+		for (i = 0; i < 25; i++)
+		{
+			json[i] = {name: newBoard[i+1].name}
+		}
+		console.log(json)
+		outputTextarea.value = JSON.stringify(json)
 		copiedText.style.visibility = "hidden"
 	}
 	copyButton.onclick = function()
