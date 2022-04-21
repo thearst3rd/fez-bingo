@@ -13,12 +13,12 @@ Enjoy!
 	<input id="generate-button" type="button" value="Generate New Board"/>
 </div>
 <div>
-	<textarea id="output-textarea" placeholder="Generated board" cols="50" rows="5"></textarea>
+	<textarea id="output-textarea" placeholder="Generated board" cols="70" rows="7"></textarea>
 </div>
 <input id="copy-button" type="button" value="Copy to Clipboard"/>
 <p id="copied-text" style="visibility: hidden">Copied!</p>
-<script src="srl_generator_v5.js"></script>
-<script src="fez_bingolist_srlv5.js"></script>
+<script src="synergen.js"></script>
+<script src="fez_bingolist_synergen.js"></script>
 <script>
 	const seedText = document.getElementById("seed-text")
 	const generateButton = document.getElementById("generate-button")
@@ -40,17 +40,18 @@ Enjoy!
 			}
 			else
 			{
-				console.log(seedText.value, "or", seed, "is not valid seed, ignoring")
+				console.log(seedText.value, "is not a valid seed, ignoring")
 				seedText.value = ""
 			}
 		}
-		let newBoard = bingoGeneratorSrlv5(bingoListSrlv5, opts)
+		let newBoard = bingoGeneratorSynerGen(JSON.parse(JSON.stringify(bingoListSynerGen)), opts)
 		let json = []
 		for (i = 0; i < 25; i++)
 		{
-			json[i] = {name: newBoard[i+1].name}
+			json[i] = {name: newBoard[i].name}
+			if (json[i].name.startsWith("#!#"))
+				json[i].name = json[i].name.substring(3, json[i].name.length - 3)
 		}
-		console.log(json)
 		outputTextarea.value = JSON.stringify(json)
 		copiedText.style.visibility = "hidden"
 	}
@@ -72,7 +73,7 @@ Enjoy!
 	* Reset manipulation is banned
 	* Save state manipulation is banned
 
-## How To Play
+## Setup Guide
 
 1. Go to [https://bingosync.com](https://bingosync.com)
 2. In the "New Room" section, create a room name, password, and give yourself a nickname
@@ -88,6 +89,5 @@ Enjoy!
 
 A few games played by Jokertyf and I can be found here:
 
-* [https://youtu.be/DqVuff4dB9I](https://youtu.be/DqVuff4dB9I)
-* [https://www.twitch.tv/videos/1452319274](https://www.twitch.tv/videos/1452319274)
-* [https://www.twitch.tv/videos/1452319276](https://www.twitch.tv/videos/1452319276)
+* [Best of three submitted to Indiethon](https://youtu.be/DqVuff4dB9I)
+* Some of our first ever test runs: [run 1](https://www.twitch.tv/videos/1452319274), [run 2](https://www.twitch.tv/videos/1452319276)
