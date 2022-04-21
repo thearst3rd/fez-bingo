@@ -34,7 +34,7 @@ var bingoListSynerGen = {
 
 	"Nature - Arch invisible platforms anti cube": {"Diff": 6},
 	"Nature - Mine golden cube": {"Diff": 6},
-	"Fully complete Village": {"Diff": 6},
+	"Fully complete Village (including all small sub rooms)": {"Diff": 6},
 
 	"Nature - Sync room top anti cube": {"Diff": 7},
 	"Nature - Bell tower golden cube": {"Diff": 7},
@@ -44,15 +44,17 @@ var bingoListSynerGen = {
 	"Tree/Nature - QR map/Lighthouse owl room anti cube": {"Diff": 8},
 	"Nature - Top of arch golden cube": {"Diff": 8},
 	"Do not collect any of the bits in the village climb": {"Diff": 8},
+	"Nature - Glitch room anti cube": {"Diff": 8},
 
 	"Collect 4 golden cubes": {"Diff": 9, "Types": ["numgolden"]},
 	"Collect all 4 obelisk anti cubes": {"Diff": 9, "Types": ["numobelisks"]},
 	"Collect 3 maps": {"Diff": 9, "Types": ["nummaps"]},
 
-	"Fully complete the Flatland area": {"Diff": 10},
+	"Fully complete the Flatland area (including all small sub rooms)": {"Diff": 10},
 	"Collect the security question heart piece": {"Diff": 10},
 	"Nature - Arch secret room golden cube": {"Diff": 10},
 	"Collect 8 anti cubes": {"Diff": 10, "Types": ["numanti"]},
+	"Nature - Totem pole puzzle anti cube": {"Diff": 10},
 
 	"Tree - Cube net puzzle anti cube": {"Diff": 11},
 	"Zu - QR wall anti cube": {"Diff": 11},
@@ -60,7 +62,7 @@ var bingoListSynerGen = {
 	"Have 3 keys in your inventory at the same time": {"Diff": 11, "Types": ["numkeys"]},
 
 	"Graveyard - Lesser gate golden cube": {"Diff": 12},
-	"Fully complete the Nocturne area": {"Diff": 12},
+	"Fully complete the Nocturne area (including all small sub rooms)": {"Diff": 12},
 	"Collect the number artifact": {"Diff": 12},
 	"Collect 12 total cubes": {"Diff": 12, "Types": ["numcubes"]},
 
@@ -104,13 +106,13 @@ var bingoListSynerGen = {
 	"Collect all 4 pieces of the skull map puzzle": {"Diff": 20},
 	"Finish the run with the same number of golden cubes and anti cubes (excluding bits)": {"Diff": 20},
 
-	"Fully complete the Industrial hub": {"Diff": 21},
+	"Fully complete the Industrial hub (including all small sub rooms)": {"Diff": 21},
 	"Collect 20 total cubes": {"Diff": 21, "Types": ["numcubes"]},
 
 	"Collect the bit at the top of Old Zu": {"Diff": 22, "Types": ["completezu"]},
 	"Visit all 5 hubs": {"Diff": 22},
 
-	"Fully complete Old Zu": {"Diff": 23, "Types": ["completezu"]},
+	"Fully complete Old Zu (including all small sub rooms)": {"Diff": 23, "Types": ["completezu"]},
 	"Sewers - Golden cube after the pillars": {"Diff": 23},
 	"Do not use any warp gates or little gates": {"Diff": 23},
 
