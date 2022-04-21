@@ -66,7 +66,6 @@ Enjoy!
 
 * The bingo game begins on starting a new game in Speedrun mode, at which point the runners should reveal the bingo card
 * The bingo game ends when one runner fills in a row, column, or diagonal (beating the game is not required)
-* Any square that says "do not X" may be marked completed at the start, then unmarked when a player has done that thing
 * Most normal rules of any% apply, specifically:
 	* System clock manipulation is banned
 	* Cube duplication is banned

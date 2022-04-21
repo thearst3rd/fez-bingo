@@ -43,7 +43,7 @@ var bingoListSynerGen = {
 
 	"Tree/Nature - QR map/Lighthouse owl room anti cube": {"Diff": 8},
 	"Nature - Top of arch golden cube": {"Diff": 8},
-	"Do not collect any of the bits in the village climb": {"Diff": 8},
+	"Enter the two-cube door without collecting any of the bits in the village climb": {"Diff": 8},
 	"Nature - Glitch room anti cube": {"Diff": 8},
 
 	"Collect 4 golden cubes": {"Diff": 9, "Types": ["numgolden"]},
@@ -82,7 +82,7 @@ var bingoListSynerGen = {
 	"Collect 12 anti cubes": {"Diff": 15, "Types": ["numanti"]},
 	"Zu - Clock tower golden cube": {"Diff": 15},
 	"Nature - Lighthouse invisible platforms anti cube": {"Diff": 15},
-	"Do not lower the water level in waterfall": {"Diff": 15},
+	"Finish the run without lowering the water level in waterfall": {"Diff": 15},
 
 	"Nocturne - Classroom anti cube": {"Diff": 16},
 	"Graveyard - Rotating skulls anti cube": {"Diff": 16},
@@ -114,11 +114,11 @@ var bingoListSynerGen = {
 
 	"Fully complete Old Zu (including all small sub rooms)": {"Diff": 23, "Types": ["completezu"]},
 	"Sewers - Golden cube after the pillars": {"Diff": 23},
-	"Do not use any warp gates or little gates": {"Diff": 23},
+	"Finish the run without using any warp gates or little gates": {"Diff": 23},
 
 	"Sewers - Pivot puzzle golden cube": {"Diff": 24},
 	"Collect all 4 tuning fork anti cubes": {"Diff": 24, "Types": ["numtuningforks"]},
-	"Do not collect any anti cubes": {"Diff": 24, "Types": ["numanti"]},
+	"Finish the run without collecting any anti cubes": {"Diff": 24, "Types": ["numanti"]},
 
 	"Sewers - Rising lava anti cube": {"Diff": 25},
 	"Talk to all 4 owls and collect owl room anti cube": {"Diff": 25},
