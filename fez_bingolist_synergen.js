@@ -12,7 +12,7 @@ var bingoListSynerGen = {
 
 	// Goals
 	"Finish the run with 0 bits collected": {"Diff": 1, "Types": ["numbits"]},
-	"Finish the run with 1 bits collected": {"Types": ["numbits"], "Diff": 1},
+	"Finish the run with 1 bits collected": {"Diff": 1, "Types": ["numbits"]},
 	"Village - Monocle room anti cube": {"Diff": 1},
 	"Achievement code anti cube": {"Diff": 1},
 
