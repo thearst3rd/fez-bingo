@@ -81,7 +81,6 @@ var bingoListSynerGen = {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// In hub
-	"zu_owl": {"Desc": "Talk to the Zu owl", "Diff": 12},
 	"zu_map": {"Desc": "Zu - Hub room map", "Diff": 12, "Types": ["single_map"]},
 
 	// 1 room away from Zu hub
@@ -91,6 +90,7 @@ var bingoListSynerGen = {
 	"clock_cube": {"Desc": "Zu - Clock tower golden cube", "Diff": 15},
 
 	// 2 rooms away from Zu hub
+	"zu_owl": {"Desc": "Talk to the Zu owl", "Diff": 15},
 	"squid_cube": {"Desc": "Zu - Squid statue golden cube", "Diff": 15},
 	"observatory_anti": {"Desc": "Zu - Observatory anti cube", "Diff": 16},
 	"observatory_heart": {"Desc": "Collect the observatory heart piece", "Diff": 16},
