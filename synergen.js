@@ -179,6 +179,7 @@ bingoGeneratorSynerGen = function(bingoList, opts) {
 
         //this is necessary on the edge case that all the exclusions and difficulties wind up eliminating every goal
         if (choosable.length == 0) {
+            console.log("No choosable items left, board might not fit the restrictions") // thearst3rd
             var newChoosableDiffs = [];
             //add all goals with difficulty one more or less than any of the remaining difficulties back into choosable[]
             for (var j of unchosenDiffs) {
@@ -197,7 +198,6 @@ bingoGeneratorSynerGen = function(bingoList, opts) {
             }
             //if choosable[] is still empty, just move everything from unchoosable[] back
             if (choosable.length == 0) {
-                console.log("No choosable items left, board might be impossible") // thearst3rd
                 while (unchoosable.length > 0)
                     choosable = choosable.concat(unchoosable.splice(0, 1));
             }
