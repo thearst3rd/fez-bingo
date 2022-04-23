@@ -282,6 +282,6 @@ var bingoListSynerGen = {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	"perfectly_balanced": {"Desc": "Finish the run with the same number of golden cubes and anti cubes (excluding bits)", "Diff": 20},
-	"no_warps": {"Desc": "Finish the run without using any warp gates or little gates", "Diff": 23, "Excludes": ["sync_top_anti", "clock_cube", "lava_anti", "superspin_cube", "spin_plates_cube"]},
+	"no_warps": {"Desc": "Finish the run without using any warp gates or little gates", "Diff": 23, "Excludes": ["sync_top_anti", "clock_cube", "lava_anti"]},
 	"owl_anti": {"Desc": "Talk to all 4 owls and collect owl room anti cube", "Diff": 25, "Excludes": ["waterfall_owl", "tree_owl", "zu_owl", "industrial_owl"]},
 }
