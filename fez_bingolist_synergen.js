@@ -19,7 +19,7 @@ var bingoListSynerGen = {
 	"achievement_anti": {"Desc": "Achievement code anti cube", "Diff": 1},
 	"boiler_anti": {"Desc": "Village - Boiler room anti cube", "Diff": 2},
 	"boiler_map": {"Desc": "Village - Boiler room map", "Diff": 2, "Types": ["single_map"]},
-	"complete_village": {"Desc": "Fully complete Village (including all small sub rooms)", "Diff": 6},
+	"complete_village": {"Desc": "Fully complete Village (including all sub rooms)", "Diff": 6},
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// NATURE HUB GOALS (BASE DIFFICULTY: 3)
@@ -221,14 +221,14 @@ var bingoListSynerGen = {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	"early_flatland": {"Desc": "Enter the Flatland area before the Nature hub.", "Diff": 5},
-	"complete_flatland": {"Desc": "Fully complete the Flatland area (including all small sub rooms)", "Diff": 10},
+	"complete_flatland": {"Desc": "Fully complete the Flatland area (including all sub rooms)", "Diff": 10},
 
 	"visit_nocturne": {"Desc": "Visit the Nocture area", "Diff": 8},
 	"classroom_anti": {"Desc": "Nocturne - Classroom anti cube", "Diff": 9, "Excludes": ["visit_nocturne"]},
-	"complete_nocturne": {"Desc": "Fully complete the Nocturne area (including all small sub rooms)", "Diff": 12},
+	"complete_nocturne": {"Desc": "Fully complete the Nocturne area (including all sub rooms)", "Diff": 12},
 
 	"visit_old_zu": {"Desc": "Visit Old Zu", "Diff": 16},
-	"complete_old_zu": {"Desc": "Fully complete Old Zu (including all small sub rooms)", "Diff": 21, "Excludes": ["visit_old_zu"]},
+	"complete_old_zu": {"Desc": "Fully complete Old Zu (including all sub rooms)", "Diff": 21, "Excludes": ["visit_old_zu"]},
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// VARIOUS NUMBERED GOALS
