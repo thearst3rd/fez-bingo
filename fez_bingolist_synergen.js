@@ -109,11 +109,11 @@ var bingoListSynerGen = {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 1 room away from graveyard hub
-	"complete_graveyard_top_room": {"Desc": "Graveyard - Complete room at top of hub", "Diff": 11},
 	"graveyard_map": {"Desc": "Graveyard - Mausoleum map", "Diff": 11, "Types": ["single_map"]},
 
 	// 2 rooms away from graveyard hub
 	"graveyard_skulls_anti": {"Desc": "Graveyard - Rotating skulls anti cube", "Diff": 12},
+	"complete_graveyard_top_room": {"Desc": "Graveyard - Complete room at top of mausoleum", "Diff": 13},
 
 	// 3 rooms away from graveyard hub
 	"grave_lesser_gate_cube": {"Desc": "Graveyard - Lesser gate golden cube (middle floating island)", "Diff": 14},
