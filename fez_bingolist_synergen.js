@@ -7,7 +7,9 @@ var bingoListSynerGen = {
 		"num_anti": {"Max": 1},
 		"num_cubes": {"Max": 1},
 		"num_keys": {"Max": 1},
-		"num_maps": {"Max": 1}
+		"num_maps": {"Max": 1},
+		"num_artifacts": {"Max": 1},
+		"single_artifact": {"Max": 1}
 	},
 	"maxScore": 0,
 
@@ -32,11 +34,12 @@ var bingoListSynerGen = {
 
 	"2_map": {"Desc": "Collect 2 maps", "Diff": 5, "Types": ["num_maps"]},
 	"waterfall_owl": {"Desc": "Talk to the waterfall owl", "Diff": 5},
-	"writing_artifact": {"Desc": "Collect the writing artifact", "Diff": 5},
+	"any_artifact": {"Desc": "Collect any artifact", "Diff": 5, "Types": ["num_artifacts", "single_artifact"]},
 
 	"arch_invis_anti": {"Desc": "Nature - Arch invisible platforms anti cube", "Diff": 6},
 	"mine_cube": {"Desc": "Nature - Mine golden cube", "Diff": 6},
 	"complete_village": {"Desc": "Fully complete Village (including all small sub rooms)", "Diff": 6},
+	"writing_artifact": {"Desc": "Collect the writing artifact", "Diff": 6, "Types": ["single_artifact"]},
 
 	"sync_top_anti": {"Desc": "Nature - Sync room top anti cube", "Diff": 7},
 	"bell_cube": {"Desc": "Nature - Bell tower golden cube", "Diff": 7},
@@ -64,7 +67,7 @@ var bingoListSynerGen = {
 
 	"grave_lesser_gate_cube": {"Desc": "Graveyard - Lesser gate golden cube", "Diff": 12},
 	"complete_nocturne": {"Desc": "Fully complete the Nocturne area (including all small sub rooms)", "Diff": 12},
-	"num_ber_artifact": {"Desc": "Collect the number artifact", "Diff": 12},
+	"number_artifact": {"Desc": "Collect the number artifact", "Diff": 12, "Types": ["single_artifact"]},
 	"12_cube": {"Desc": "Collect 12 total cubes", "Diff": 12, "Types": ["num_cubes"]},
 
 	"grave_treasure_cube": {"Desc": "Graveyard - Treasure golden cube", "Diff": 13},
@@ -87,9 +90,9 @@ var bingoListSynerGen = {
 
 	"classroom_anti": {"Desc": "Nocturne - Classroom anti cube", "Diff": 16},
 	"graveyard_skulls_anti": {"Desc": "Graveyard - Rotating skulls anti cube", "Diff": 16},
-	"tome_artifact": {"Desc": "Collect the tome artifact", "Diff": 16},
+	"tome_artifact": {"Desc": "Collect the tome artifact", "Diff": 16, "Types": ["single_artifact"]},
 	"zu_owl": {"Desc": "Talk to the Zu owl", "Diff": 16},
-	"4_map": {"Desc": "Collect 4 maps", "Diff": 13, "Types": ["num_maps"]},
+	"4_map": {"Desc": "Collect 4 maps", "Diff": 16, "Types": ["num_maps"]},
 
 	"windmill_cube": {"Desc": "Industrial - Golden cube inside windmill", "Diff": 17},
 	"16_cube": {"Desc": "Collect 16 total cubes", "Diff": 17, "Types": ["num_cubes"]},
@@ -100,7 +103,7 @@ var bingoListSynerGen = {
 	"6_map": {"Desc": "Collect 6 maps", "Diff": 18, "Types": ["num_maps"]},
 
 	"superspin_cube": {"Desc": "Industrial - Superspin golden cube", "Diff": 19},
-	"skull_artifact": {"Desc": "Collect the skull artifact", "Diff": 19},
+	"skull_artifact": {"Desc": "Collect the skull artifact", "Diff": 19, "Types": ["single_artifact"]},
 	"industrial_owl": {"Desc": "Talk to the Industrial owl", "Diff": 19},
 
 	"12_golden": {"Desc": "Collect 12 golden cubes", "Diff": 20, "Types": ["num_golden"]},
