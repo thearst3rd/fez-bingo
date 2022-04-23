@@ -197,6 +197,7 @@ bingoGeneratorSynerGen = function(bingoList, opts) {
             }
             //if choosable[] is still empty, just move everything from unchoosable[] back
             if (choosable.length == 0) {
+                console.log("No choosable items left, board might be impossible") // thearst3rd
                 while (unchoosable.length > 0)
                     choosable = choosable.concat(unchoosable.splice(0, 1));
             }

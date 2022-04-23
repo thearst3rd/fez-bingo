@@ -44,6 +44,7 @@ Enjoy!
 				seedText.value = ""
 			}
 		}
+		console.log("Generating...")
 		let newBoard = bingoGeneratorSynerGen(JSON.parse(JSON.stringify(bingoListSynerGen)), opts)
 		let json = []
 		for (i = 0; i < 25; i++)
