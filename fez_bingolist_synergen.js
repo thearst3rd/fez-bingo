@@ -46,6 +46,7 @@ var bingoListSynerGen = {
 	"3_obelisks": {"Desc": "Collect 3 obelisk anti cubes", "Diff": 7, "Types": ["num_obelisks"]},
 	"2_tuning_forks": {"Desc": "Collect 2 tuning fork anti cubes", "Diff": 7, "Types": ["num_tuningforks"]},
 
+	"visit_graveyard": {"Desc": "Visit the Graveyard hub room.", "Diff": 8},
 	"qr_map_anti": {"Desc": "Tree/Nature - QR map/Lighthouse owl room anti cube", "Diff": 8},
 	"arch_top_cube": {"Desc": "Nature - Top of arch golden cube", "Diff": 8},
 	"glitch_anti": {"Desc": "Nature - Glitch room anti cube", "Diff": 8},
@@ -53,6 +54,7 @@ var bingoListSynerGen = {
 	"4_golden": {"Desc": "Collect 4 golden cubes", "Diff": 9, "Types": ["num_golden"]},
 	"4_anti": {"Desc": "Collect all 4 obelisk anti cubes", "Diff": 9, "Types": ["num_obelisks"]},
 	"3_map": {"Desc": "Collect 3 maps", "Diff": 9, "Types": ["num_maps"]},
+	"visit_zu": {"Desc": "Visit the Zu hub room.", "Diff": 9},
 
 	"complete_flatland": {"Desc": "Fully complete the Flatland area (including all small sub rooms)", "Diff": 10},
 	"security_heart": {"Desc": "Collect the security question heart piece", "Diff": 10},
@@ -79,10 +81,11 @@ var bingoListSynerGen = {
 	"4_map": {"Desc": "Collect 4 maps", "Diff": 13, "Types": ["num_maps"]},
 
 	"tree_owl": {"Desc": "Talk to the tree owl", "Diff": 14},
-	"3_hub": {"Desc": "Visit 3 hubs", "Diff": 14, "Types": ["num_hubs"]},
+	"3_hub": {"Desc": "Visit 3 hubs", "Diff": 14, "Types": ["num_hubs"], "Excludes": ["visit_zu", "visit_graveyard", "visit_industrial", "visit_sewers"]},
 	"observatory_anti": {"Desc": "Zu - Observatory anti cube", "Diff": 14},
 	"observatory_heart": {"Desc": "Collect the observatory heart piece", "Diff": 14},
 	"rosetta_anti": {"Desc": "Zu - Rosetta anti cube", "Diff": 14},
+	"visit_industrial": {"Desc": "Visit the Industrial hub room.", "Diff": 14},
 
 	"12_anti": {"Desc": "Collect 12 anti cubes", "Diff": 15, "Types": ["num_anti"]},
 	"clock_cube": {"Desc": "Zu - Clock tower golden cube", "Diff": 15},
@@ -101,8 +104,9 @@ var bingoListSynerGen = {
 	"4_key": {"Desc": "Have 4 keys in your inventory at the same time", "Diff": 17, "Types": ["num_keys"]},
 
 	"pivot_cube": {"Desc": "Industrial - Pivot golden cube (after windmill)", "Diff": 18},
-	"4_hub": {"Desc": "Visit 4 hubs", "Diff": 18, "Types": ["num_hubs"]},
+	"4_hub": {"Desc": "Visit 4 hubs", "Diff": 18, "Types": ["num_hubs"], "Excludes": ["visit_zu", "visit_graveyard", "visit_industrial", "visit_sewers"]},
 	"6_map": {"Desc": "Collect 6 maps", "Diff": 18, "Types": ["num_maps"]},
+	"visit_sewers": {"Desc": "Visit the Sewers hub room.", "Diff": 18},
 
 	"superspin_cube": {"Desc": "Industrial - Superspin golden cube", "Diff": 19},
 	"skull_artifact": {"Desc": "Collect the skull artifact", "Diff": 19},
@@ -118,7 +122,7 @@ var bingoListSynerGen = {
 	"4_artifact": {"Desc": "Collect all 4 artifacts", "Diff": 21, "Types": ["num_artifacts"], "Excludes": ["writing_artifact", "number_artifact", "tome_artifact", "skull_artifact"]},
 
 	"old_zu_bit": {"Desc": "Collect the bit at the top of Old Zu", "Diff": 22, "Types": ["completezu"]},
-	"5_hub": {"Desc": "Visit all 5 hubs", "Diff": 22, "Types": ["num_hubs"]},
+	"5_hub": {"Desc": "Visit all 5 hubs", "Diff": 22, "Types": ["num_hubs"], "Excludes": ["visit_zu", "visit_graveyard", "visit_industrial", "visit_sewers"]},
 
 	"complete_old_zu": {"Desc": "Fully complete Old Zu (including all small sub rooms)", "Diff": 23, "Types": ["completezu"]},
 	"sew_after_pillars_cube": {"Desc": "Sewers - Golden cube after the pillars", "Diff": 23},
