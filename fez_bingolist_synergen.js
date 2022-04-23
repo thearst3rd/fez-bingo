@@ -116,8 +116,8 @@ var bingoListSynerGen = {
 	"graveyard_skulls_anti": {"Desc": "Graveyard - Rotating skulls anti cube", "Diff": 12},
 
 	// 3 rooms away from graveyard hub
-	"grave_treasure_cube": {"Desc": "Graveyard - Treasure golden cube", "Diff": 14},
-	"grave_lesser_gate_cube": {"Desc": "Graveyard - Lesser gate golden cube", "Diff": 15},
+	"grave_lesser_gate_cube": {"Desc": "Graveyard - Lesser gate golden cube (middle floating island)", "Diff": 14},
+	"grave_treasure_cube": {"Desc": "Graveyard - Treasure golden cube (top floating island)", "Diff": 15},
 
 	// 4+ rooms away from graveyard hub
 	"skull_artifact": {"Desc": "Collect the skull artifact", "Diff": 20},
