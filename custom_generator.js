@@ -516,6 +516,16 @@ function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
 		}
 	}
 
+	// If any group this intersects with has 2 cube collection goals already, do not let it have a third.
+	for(var i = 0; i < groups.length; i++)
+	{
+		if(groups[i].hasTwoCubeGoals())
+		{
+			excludes.push("num_golden", "num_anti", "num_cubes")
+			break
+		}
+	}
+
 	// Put all the available goals into a list.
 	var available_goals = []
 	for(const key in unchosen)
@@ -626,6 +636,10 @@ function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
 				possible_diffs.push(i)
 			}
 		}
+		if(possible_diffs.length == 0)
+		{
+			possible_diffs.push(min_diff)
+		}
 
 		diff = possible_diffs[Math.floor(Math.random() * possible_diffs.length)]
 	}
@@ -635,21 +649,16 @@ function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
 	if(correct_diff_goals.length == 0)
 	{
 		console.log("No groups found with correct difficulty.")
-		var new_diffs = []
-		if(diff == max_goal_diff)
+		for(var i = 0; i <= max_goal_diff; i++)
 		{
-			new_diffs = [diff - 1, diff - 2]
+			var new_diffs = [diff + i, diff - i];
+			correct_diff_goals = searchForGoals(available_goals, new_diffs, target_diff, groups)
+			if(correct_diff_goals.length > 0)
+			{
+				return correct_diff_goals[Math.floor(Math.random() * correct_diff_goals.length)]
+			}
 		}
-		else if(diff == min_goal_diff)
-		{
-			new_diffs = [diff + 1, diff + 2]
-		}
-		else
-		{
-			new_diffs = [diff - 1, diff + 1]
-		}
-		correct_diff_goals = searchForGoals(available_goals, new_diffs, target_diff, groups)
-		return correct_diff_goals[Math.floor(Math.random() * correct_diff_goals.length)]
+		console.log("All goals found to be impossible.")
 	}
 	else
 	{
@@ -808,6 +817,37 @@ class BingoGroup
 			}
 		}
 		return synergies
+	}
+
+	types()
+	{
+		var types = []
+		for(var i = 0; i < this.goals.length; i++)
+		{
+			var curr_goal = this.goals[i]
+			if(curr_goal.hasOwnProperty("types"))
+			{
+				for(var j = 0; j < curr_goal.types.length; j++)
+				{
+					var curr_type = curr_goal.types[j]
+					if(!types.includes(curr_type))
+					{
+						types.push(curr_type)
+					}
+				}
+			}
+		}
+		return types
+	}
+
+	hasTwoCubeGoals()
+	{
+		var types = this.types()
+		var num_goals = 0
+		if(types.includes("num_cubes")) num_goals++
+		if(types.includes("num_anti")) num_goals++
+		if(types.includes("num_golden")) num_goals ++
+		return (num_goals > 2)
 	}
 
 	numChosen()
