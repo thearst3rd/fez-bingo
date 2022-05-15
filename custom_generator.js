@@ -306,56 +306,41 @@ bingoGeneratorCustom = function(bingo_list, opts)
         types[key] = bingo_types[key].max
     }
 
-    // Create a 5x5 grid of empty objects.
-    board = Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => new BingoGoal()))
+	var score_target = 60
 
-    var score_target = 60
+	var board
 
-	filling_order = [
-		[2, 2],
-		[1, 2],
-		[3, 2],
-		[1, 3],
-		[3, 1],
-		[2, 3],
-		[2, 1],
-		[3, 3],
-		[1, 1],
-		[0, 4],
-		[4, 0],
-		[1, 4],
-		[3, 0],
-		[2, 4],
-		[2, 0],
-		[3, 4],
-		[1, 0],
-		[4, 4],
-		[0, 0],
-		[4, 3],
-		[0, 1],
-		[4, 2],
-		[0, 2],
-		[4, 1],
-		[0, 3]
-	]
-
-	var unchosen_goals = bingo_list
-
-	for(var i = 0; i < filling_order.length; i++)
+	// Do up to ten iterations.
+	for(var i = 0; i < 100; i++)
 	{
-		var row_idx = filling_order[i][0]
-		var col_idx = filling_order[i][1]
-		var goal = selectGoal(board, row_idx, col_idx, score_target, unchosen_goals)
-		board[row_idx][col_idx].setGoal(goal)
-		// Remove the chosen goal from the available goals.
-		for(const key in unchosen_goals)
+		board = createBoard(score_target, bingo_list)
+		var diff_sums = []
+
+		diff_sums.push(getRow(board, 0).diffSum())
+		diff_sums.push(getRow(board, 1).diffSum())
+		diff_sums.push(getRow(board, 2).diffSum())
+		diff_sums.push(getRow(board, 3).diffSum())
+		diff_sums.push(getRow(board, 4).diffSum())
+		diff_sums.push(getCol(board, 0).diffSum())
+		diff_sums.push(getCol(board, 1).diffSum())
+		diff_sums.push(getCol(board, 2).diffSum())
+		diff_sums.push(getCol(board, 3).diffSum())
+		diff_sums.push(getCol(board, 4).diffSum())
+		diff_sums.push(getTLBR(board).diffSum())
+		diff_sums.push(getTRBL(board).diffSum())
+
+		if((Math.min(...diff_sums) > score_target - 5) && (Math.max(...diff_sums) < score_target + 10))
 		{
-			if(unchosen_goals[key] == goal)
-			{
-				delete unchosen_goals[key]
-			}
+			break
 		}
+		console.log("Board did not meet requirements.")
+		console.log("Max: ", Math.max(...diff_sums))
+		console.log("Min: ", Math.min(...diff_sums))
 	}
+
+	console.log(diff_sums)
+	console.log("Max: ", Math.max(...diff_sums))
+	console.log("Min: ", Math.min(...diff_sums))
 
 	var goals_list = []
 	for(var row_idx = 0; row_idx < 5; row_idx++)
@@ -368,25 +353,7 @@ bingoGeneratorCustom = function(bingo_list, opts)
 
 	console.log(JSON.stringify(goals_list))
 
-	var diff_sums = []
-
-	diff_sums.push(getRow(board, 0).diffSum())
-	diff_sums.push(getRow(board, 1).diffSum())
-	diff_sums.push(getRow(board, 2).diffSum())
-	diff_sums.push(getRow(board, 3).diffSum())
-	diff_sums.push(getRow(board, 4).diffSum())
-	diff_sums.push(getCol(board, 0).diffSum())
-	diff_sums.push(getCol(board, 1).diffSum())
-	diff_sums.push(getCol(board, 2).diffSum())
-	diff_sums.push(getCol(board, 3).diffSum())
-	diff_sums.push(getCol(board, 4).diffSum())
-	diff_sums.push(getTLBR(board).diffSum())
-	diff_sums.push(getTRBL(board).diffSum())
-
-	console.log(diff_sums)
-	console.log("Max: ", Math.max(...diff_sums))
-	console.log("Min: ", Math.min(...diff_sums))
-
+	return JSON.stringify(goals_list)
 }
 
 /**
@@ -489,6 +456,60 @@ function preprocessBingoList(bingo_list) {
         if (!bingo_list[key].hasOwnProperty("score"))
             bingo_list[key].score = 0
     }
+}
+
+function createBoard(score_target, bingo_list)
+{
+    // Create a 5x5 grid of empty objects.
+    var board = Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => new BingoGoal()))
+
+	const filling_order = [
+		[2, 2],
+		[1, 2],
+		[3, 2],
+		[1, 3],
+		[3, 1],
+		[2, 3],
+		[2, 1],
+		[3, 3],
+		[1, 1],
+		[0, 4],
+		[4, 0],
+		[1, 4],
+		[3, 0],
+		[2, 4],
+		[2, 0],
+		[3, 4],
+		[1, 0],
+		[4, 4],
+		[0, 0],
+		[4, 3],
+		[0, 1],
+		[4, 2],
+		[0, 2],
+		[4, 1],
+		[0, 3]
+	]
+
+	var unchosen_goals = {...bingo_list}
+
+	for(var i = 0; i < filling_order.length; i++)
+	{
+		var row_idx = filling_order[i][0]
+		var col_idx = filling_order[i][1]
+		var goal = selectGoal(board, row_idx, col_idx, score_target, unchosen_goals)
+		board[row_idx][col_idx].setGoal(goal)
+		// Remove the chosen goal from the available goals.
+		for(const key in unchosen_goals)
+		{
+			if(unchosen_goals[key] == goal)
+			{
+				delete unchosen_goals[key]
+			}
+		}
+	}
+
+	return board
 }
 
 function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
@@ -648,7 +669,7 @@ function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
 
 	if(correct_diff_goals.length == 0)
 	{
-		console.log("No groups found with correct difficulty.")
+		console.log("No goals found with correct difficulty.")
 		for(var i = 0; i <= max_goal_diff; i++)
 		{
 			var new_diffs = [diff + i, diff - i];
