@@ -1,5 +1,5 @@
-var bingo_list_custom = {
-	"bingo_types": {
+var bingoListCustom = {
+	"bingoTypes": {
 		"end_goals": {"max": 1},
 		"num_obelisks": {"max": 1},
 		"num_tuningforks": {"max": 1},
@@ -13,7 +13,6 @@ var bingo_list_custom = {
 		"single_map": {"max": 2},
 		"num_owls": {"max": 1}
 	},
-	"max_score": 0,
 
 	// Found in village.
 	"monocle_anti": {"desc": "Village - Monocle room anti cube", "diff": 1},

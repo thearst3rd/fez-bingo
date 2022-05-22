@@ -1,80 +1,80 @@
-/**
- * Custom bingo generator, taking into account dynamic difficulty.
- */
+// Custom bingo generator, taking into account dynamic difficulty.
+// Some code taken from SynerGen
 
 var RandomGen = {};
 (function(j, i, g, m, k, n, o) { function q(b) { var e, f, a = this, c = b.length, d = 0, h = a.i = a.j = a.m = 0; a.S = []; a.c = []; for (c || (b = [c++]); d < g;) a.S[d] = d++; for (d = 0; d < g; d++) e = a.S[d], h = h + e + b[d % c] & g - 1, f = a.S[h], a.S[d] = f, a.S[h] = e; a.g = function(b) { var c = a.S, d = a.i + 1 & g - 1, e = c[d], f = a.j + e & g - 1, h = c[f]; c[d] = h; c[f] = e; for (var i = c[e + h & g - 1]; --b;) d = d + 1 & g - 1, e = c[d], f = f + e & g - 1, h = c[f], c[d] = h, c[f] = e, i = i * g + c[e + h & g - 1]; a.i = d; a.j = f; return i }; a.g(g) } function p(b, e, f, a, c) { f = []; c = typeof b; if (e && c == "object") for (a in b) if (a.indexOf("S") < 5) try { f.push(p(b[a], e - 1)) } catch (d) {} return f.length ? f : b + (c != "string" ? "\0" : "") } function l(b, e, f, a) { b += ""; for (a = f = 0; a < b.length; a++) { var c = e, d = a & g - 1, h = (f ^= e[a & g - 1] * 19) + b.charCodeAt(a); c[d] = h & g - 1 } b = ""; for (a in e) b += String.fromCharCode(e[a]); return b } i.seedrandom = function(b, e) { var f = [], a; b = l(p(e ? [b, j] : arguments.length ? b : [(new Date).getTime(), j, window], 3), f); a = new q(f); l(a.S, j); i.random = function() { for (var c = a.g(m), d = o, b = 0; c < k;) c = (c + b) * g, d *= g, b = a.g(1); for (; c >= n;) c /= 2, d /= 2, b >>>= 1; return (c + b) / d }; return b }; o = Math.pow(g, m); k = Math.pow(2, k); n = k * 2; l(Math.random(), j) })([], RandomGen, 256, 6, 52);
 
-bingoGeneratorCustom = function(bingo_list, opts)
+bingoGeneratorCustom = function(bingoList, opts)
 {
-	//Make sure everything exists that should, pull out maxScore and bingoTypes from bingoList
-	var bingo_types = bingo_list.bingo_types
-	delete bingo_list.bingo_types
-	var max_score = bingo_list.max_score
-	delete bingo_list.max_score
-	preprocessBingoList(bingo_list)
+	// Make sure everything exists that should, pull out bingoTypes from bingoList
+	var bingoTypes = bingoList.bingoTypes
+	delete bingoList.bingoTypes
+	preprocessBingoList(bingoList)
 
-	//Seed the random
+	// Seed the random
 	seed = RandomGen.seedrandom(opts.seed || Math.ceil(999999 * Math.random()));
 
-	//Create counts for all types
-	var types = { }
-	for (const key of Object.keys(bingo_types)) {
-		if (!bingo_types[key].hasOwnProperty("max"))
-			bingo_types[key].max = 5
-		types[key] = bingo_types[key].max
+	// Create counts for all types
+	var types = {}
+	for (const key of Object.keys(bingoTypes))
+	{
+		if (!bingoTypes[key].hasOwnProperty("max"))
+			bingoTypes[key].max = 5
+		types[key] = bingoTypes[key].max
 	}
 
-	var score_target = 60
+	var scoreTarget = 60
 
 	var board
 	var metTarget = false
 
-	// Do up to 1000 iterations to find a suitable board.
-	for(var i = 0; i < 1000; i++)
+	// Do a number of iterations until we find suitable board.
+	for (var i = 0; i < 1000; i++)
 	{
-		board = createBoard(score_target, bingo_list)
-		var diff_sums = []
+		board = createBoard(scoreTarget, bingoList)
+		var diffSums = []
 
-		diff_sums.push(getRow(board, 0).diffSum())
-		diff_sums.push(getRow(board, 1).diffSum())
-		diff_sums.push(getRow(board, 2).diffSum())
-		diff_sums.push(getRow(board, 3).diffSum())
-		diff_sums.push(getRow(board, 4).diffSum())
-		diff_sums.push(getCol(board, 0).diffSum())
-		diff_sums.push(getCol(board, 1).diffSum())
-		diff_sums.push(getCol(board, 2).diffSum())
-		diff_sums.push(getCol(board, 3).diffSum())
-		diff_sums.push(getCol(board, 4).diffSum())
-		diff_sums.push(getTLBR(board).diffSum())
-		diff_sums.push(getTRBL(board).diffSum())
+		diffSums.push(getRow(board, 0).diffSum())
+		diffSums.push(getRow(board, 1).diffSum())
+		diffSums.push(getRow(board, 2).diffSum())
+		diffSums.push(getRow(board, 3).diffSum())
+		diffSums.push(getRow(board, 4).diffSum())
+		diffSums.push(getCol(board, 0).diffSum())
+		diffSums.push(getCol(board, 1).diffSum())
+		diffSums.push(getCol(board, 2).diffSum())
+		diffSums.push(getCol(board, 3).diffSum())
+		diffSums.push(getCol(board, 4).diffSum())
+		diffSums.push(getTLBR(board).diffSum())
+		diffSums.push(getTRBL(board).diffSum())
 
-		if((Math.min(...diff_sums) > score_target - 5) && (Math.max(...diff_sums) < score_target + 10))
+		// It's ok if a column is slightly too hard, but we really don't want a column to be too easy since all runners
+		// will likely go with that column. So, we bias the score target just a little bit higher
+		if ((Math.min(...diffSums) > scoreTarget - 5) && (Math.max(...diffSums) < scoreTarget + 10))
 		{
 			metTarget = true
 			break
 		}
 	}
 
-	if(!metTarget)
+	if (!metTarget)
 	{
 		console.log("WARNING: Board did not meet requirements.")
 	}
 
-	console.log(diff_sums)
-	console.log("Max: ", Math.max(...diff_sums))
-	console.log("Min: ", Math.min(...diff_sums))
+	console.log(diffSums)
+	console.log("Max: ", Math.max(...diffSums))
+	console.log("Min: ", Math.min(...diffSums))
 
-	var goals_list = []
-	for(var row_idx = 0; row_idx < 5; row_idx++)
+	var goalsList = []
+	for (var rowIndex = 0; rowIndex < 5; rowIndex++)
 	{
-		for(var col_idx = 0; col_idx < 5; col_idx++)
+		for (var colIndex = 0; colIndex < 5; colIndex++)
 		{
-			goals_list.push({"name": board[row_idx][col_idx].desc})
+			goalsList.push({"name": board[rowIndex][colIndex].desc})
 		}
 	}
 
-	return goals_list
+	return goalsList
 }
 
 /**
@@ -105,26 +105,27 @@ function getTRBL(grid)
  * Get the cells in the given row.
  *
  * @param {Array} grid The current board state.
- * @param {Number} row_idx The row to get (zero-indexed).
+ * @param {Number} rowIndex The row to get (zero-indexed).
  *
  * @returns A BingoGroup containing the cells in the row.
  */
-function getRow(grid, row_idx)
+function getRow(grid, rowIndex)
 {
-	return new BingoGroup(grid[row_idx])
+	return new BingoGroup(grid[rowIndex])
 }
 
 /**
  * Get the cells in the given column.
  *
  * @param {Array} grid The current board state.
- * @param {Number} row_idx The column to get (zero-indexed).
+ * @param {Number} colIndex The column to get (zero-indexed).
  *
  * @returns A BingoGroup containing the cells in the column.
  */
-function getCol(grid, col_idx)
+function getCol(grid, colIndex)
 {
-	return new BingoGroup([grid[0][col_idx], grid[1][col_idx], grid[2][col_idx], grid[3][col_idx], grid[4][col_idx]])
+	return new BingoGroup([grid[0][colIndex], grid[1][colIndex], grid[2][colIndex], grid[3][colIndex],
+			grid[4][colIndex]])
 }
 
 /**
@@ -135,16 +136,18 @@ function getCol(grid, col_idx)
  * and the TL-BR diagonal.
  *
  * @param {Array} grid The current board state.
- * @param {Number} row_idx The row index of the cell to search (zero-indexed)
- * @param {Number} col_idx The column index of the cell to search (zero-indexed)
+ * @param {Number} rowIndex The row index of the cell to search (zero-indexed)
+ * @param {Number} colIndex The column index of the cell to search (zero-indexed)
  */
-function getGroups(grid, row_idx, col_idx)
+function getGroups(grid, rowIndex, colIndex)
 {
-	var groups = [getRow(grid, row_idx), getCol(grid, col_idx)]
+	var groups = [getRow(grid, rowIndex), getCol(grid, colIndex)]
 	// The TL-BR diagonal's cells all have the same row and column number.
-	if(row_idx == col_idx) groups.push(getTLBR(grid))
+	if (rowIndex == colIndex)
+		groups.push(getTLBR(grid))
 	// The TR-BL diagonal has cells whose coordinates add to 4.
-	if(row_idx + col_idx == 4) groups.push(getTRBL(grid))
+	if (rowIndex + colIndex == 4)
+		groups.push(getTRBL(grid))
 	return groups
 }
 
@@ -154,37 +157,31 @@ function selectRandomGoal(goals)
 	return goals[index]
 }
 
-//Reduces fluff in bingoList object if there's a method to set defaults
-function preprocessBingoList(bingo_list) {
-	for (const key of Object.keys(bingo_list)) {
-		bingo_list[key].name = key
+// Reduces fluff in bingoList object if there's a method to set defaults
+function preprocessBingoList(bingoList) {
+	for (const key of Object.keys(bingoList)) {
+		bingoList[key].name = key
 
-		if (!bingo_list[key].hasOwnProperty("desc"))
-			delete bingo_list[key]
+		if (!bingoList[key].hasOwnProperty("desc"))
+			delete bingoList[key]
 
-		if (!bingo_list[key].hasOwnProperty("diff"))
-			bingo_list[key].diff = 0
+		if (!bingoList[key].hasOwnProperty("diff"))
+			bingoList[key].diff = 0
 
-		if (!bingo_list[key].hasOwnProperty("types"))
-			bingo_list[key].types = []
+		if (!bingoList[key].hasOwnProperty("types"))
+			bingoList[key].types = []
 
-		if (!bingo_list[key].hasOwnProperty("excludes"))
-			bingo_list[key].excludes = []
-
-		if (!bingo_list[key].hasOwnProperty("synergy"))
-			bingo_list[key].synergy = []
-
-		if (!bingo_list[key].hasOwnProperty("score"))
-			bingo_list[key].score = 0
+		if (!bingoList[key].hasOwnProperty("excludes"))
+			bingoList[key].excludes = []
 	}
 }
 
-function createBoard(score_target, bingo_list)
+function createBoard(scoreTarget, bingoList)
 {
 	// Create a 5x5 grid of empty objects.
 	var board = Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => new BingoGoal()))
 
-	const filling_order = [
+	const fillingOrder = [
 		[2, 2],
 		[1, 2],
 		[3, 2],
@@ -212,20 +209,20 @@ function createBoard(score_target, bingo_list)
 		[0, 3]
 	]
 
-	var unchosen_goals = {...bingo_list}
+	var unchosenGoals = {...bingoList}
 
-	for(var i = 0; i < filling_order.length; i++)
+	for (var i = 0; i < fillingOrder.length; i++)
 	{
-		var row_idx = filling_order[i][0]
-		var col_idx = filling_order[i][1]
-		var goal = selectGoal(board, row_idx, col_idx, score_target, unchosen_goals)
-		board[row_idx][col_idx].setGoal(goal)
+		var rowIndex = fillingOrder[i][0]
+		var colIndex = fillingOrder[i][1]
+		var goal = selectGoal(board, rowIndex, colIndex, scoreTarget, unchosenGoals)
+		board[rowIndex][colIndex].setGoal(goal)
 		// Remove the chosen goal from the available goals.
-		for(const key in unchosen_goals)
+		for (const key in unchosenGoals)
 		{
-			if(unchosen_goals[key] == goal)
+			if (unchosenGoals[key] == goal)
 			{
-				delete unchosen_goals[key]
+				delete unchosenGoals[key]
 			}
 		}
 	}
@@ -233,35 +230,35 @@ function createBoard(score_target, bingo_list)
 	return board
 }
 
-function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
+function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 {
 	// The maximum and minimum difficulty for goals.
-	const max_goal_diff = 25
-	const min_goal_diff = 1
+	const maxGoalDiff = 25
+	const minGoalDiff = 1
 
-	var groups = getGroups(grid, row_idx, col_idx)
-	var intersecting_goals = groups.reduce(function f(acc, x) { return acc.concat(x.chosenGoals()) }, [])
-	var intersecting_goal_names = intersecting_goals.reduce(function f(acc, x) { return acc.concat(x.name) }, [])
+	var groups = getGroups(grid, rowIndex, colIndex)
+	var intersectingGoals = groups.reduce(function f(acc, x) { return acc.concat(x.chosenGoals()) }, [])
+	var intersectingGoalNames = intersectingGoals.reduce(function f(acc, x) { return acc.concat(x.name) }, [])
 
 	// Get all the constraints from cells that are already filled in.
-	var chosen_types = []
+	var chosenTypes = []
 	var excludes = []
-	for(var i = 0; i < intersecting_goals.length; i++)
+	for (var i = 0; i < intersectingGoals.length; i++)
 	{
-		if(intersecting_goals[i].hasOwnProperty("types"))
+		if (intersectingGoals[i].hasOwnProperty("types"))
 		{
-			chosen_types.push(...intersecting_goals[i].types)
+			chosenTypes.push(...intersectingGoals[i].types)
 		}
-		if(intersecting_goals[i].hasOwnProperty("excludes"))
+		if (intersectingGoals[i].hasOwnProperty("excludes"))
 		{
-			excludes.push(...intersecting_goals[i].excludes)
+			excludes.push(...intersectingGoals[i].excludes)
 		}
 	}
 
 	// If any group this intersects with has 2 cube collection goals already, do not let it have a third.
-	for(var i = 0; i < groups.length; i++)
+	for (var i = 0; i < groups.length; i++)
 	{
-		if(groups[i].hasTwoCubeGoals())
+		if (groups[i].hasTwoCubeGoals())
 		{
 			excludes.push("num_golden", "num_anti", "num_cubes")
 			break
@@ -269,194 +266,196 @@ function selectGoal(grid, row_idx, col_idx, target_diff, unchosen)
 	}
 
 	// Put all the available goals into a list.
-	var available_goals = []
-	for(const key in unchosen)
+	var availableGoals = []
+	for (const key in unchosen)
 	{
-		var curr_goal = unchosen[key]
-		var is_valid = true
-		if(curr_goal.hasOwnProperty("types"))
+		var currGoal = unchosen[key]
+		var isValid = true
+		if (currGoal.hasOwnProperty("types"))
 		{
-			for(var i = 0; i < curr_goal.types.length; i++)
+			for (var i = 0; i < currGoal.types.length; i++)
 			{
-				if(chosen_types.includes(curr_goal.types[i]))
+				if (chosenTypes.includes(currGoal.types[i]))
 				{
-					is_valid = false
+					isValid = false
 				}
 			}
 		}
-		if(curr_goal.hasOwnProperty("excludes"))
+		if (currGoal.hasOwnProperty("excludes"))
 		{
-			for(var i = 0; i < curr_goal.excludes.length; i++)
+			for (var i = 0; i < currGoal.excludes.length; i++)
 			{
-				if(intersecting_goal_names.includes(curr_goal.excludes[i]))
+				if (intersectingGoalNames.includes(currGoal.excludes[i]))
 				{
-					is_valid = false
+					isValid = false
 				}
 			}
 		}
-		if(excludes.includes(key))
+		if (excludes.includes(key))
 		{
-			is_valid = false
+			isValid = false
 		}
-		if(is_valid)
+		if (isValid)
 		{
-			available_goals.push(unchosen[key])
+			availableGoals.push(unchosen[key])
 		}
 	}
 
 	// Get the groups that have the largest number of elements.
-	var biggest_groups = []
-	var num_chosen_in_biggest_group = -1
-	for(var i = 0; i < groups.length; i++)
+	var biggestGroups = []
+	var numChosenInBiggestGroup = -1
+	for (var i = 0; i < groups.length; i++)
 	{
-		var num_chosen_in_curr_group = groups[i].numChosen()
-		if(num_chosen_in_curr_group > num_chosen_in_biggest_group)
+		var numChosenInCurrGroup = groups[i].numChosen()
+		if (numChosenInCurrGroup > numChosenInBiggestGroup)
 		{
-			biggest_groups = [groups[i]]
-			num_chosen_in_biggest_group = num_chosen_in_curr_group
+			biggestGroups = [groups[i]]
+			numChosenInBiggestGroup = numChosenInCurrGroup
 		}
-		else if (num_chosen_in_curr_group == num_chosen_in_biggest_group)
+		else if (numChosenInCurrGroup == numChosenInBiggestGroup)
 		{
-			biggest_groups.push(groups[i])
+			biggestGroups.push(groups[i])
 		}
 	}
 
-	var biggest_group_diffs = biggest_groups.reduce(function f(acc, x) { return acc.concat(x.diffSum()) }, [])
+	var biggestGroupDiffs = biggestGroups.reduce(function f(acc, x) { return acc.concat(x.diffSum()) }, [])
 
 	var diff
 
-	if(num_chosen_in_biggest_group == 4)
+	if (numChosenInBiggestGroup == 4)
 	{
-		if(biggest_groups.length == 1)
+		if (biggestGroups.length == 1)
 		{
-			diff = target_diff - biggest_groups[0].diffSum()
+			diff = targetDiff - biggestGroups[0].diffSum()
 		}
 		else
 		{
-			diff = target_diff - Math.min(...biggest_group_diffs)
+			diff = targetDiff - Math.min(...biggestGroupDiffs)
 		}
-		if(diff < 1) diff = 1
-		if(diff > 25) diff = 25
+		if (diff < 1)
+			diff = 1
+		if (diff > 25)
+			diff = 25
 	}
 	else
 	{
 		// The groups with the max and min sums, so far.
-		var max_group = groups[0]; var min_group = groups[0]
+		var maxGroup = groups[0]
+		var minGroup = groups[0]
 
-		for(var i = 1; i < groups.length; i++)
+		for (var i = 1; i < groups.length; i++)
 		{
-			if(groups[i].diffSum() > max_group.diffSum())
+			if (groups[i].diffSum() > maxGroup.diffSum())
 			{
-				max_group = groups[i]
+				maxGroup = groups[i]
 			}
-			if(groups[i].diffSum() < min_group.diffSum())
+			if (groups[i].diffSum() < minGroup.diffSum())
 			{
-				min_group = groups[i]
+				minGroup = groups[i]
 			}
 		}
 
 		// Find the minimum and mximum possible difficulty values, assuming the remaining goals are all filled in with
 		// the maximum or minimum possible.
-		var min_score_left = target_diff - max_group.diffSum()
-		var max_score_left = target_diff - min_group.diffSum()
-		var min_diff = Math.max(max_score_left - (4 - min_group.numChosen()) * (max_goal_diff - 2), min_goal_diff)
-		var max_diff = Math.min(min_score_left - (4 - max_group.numChosen()) * (min_goal_diff + 2), max_goal_diff)
+		var minScoreLeft = targetDiff - maxGroup.diffSum()
+		var maxScoreLeft = targetDiff - minGroup.diffSum()
+		var minDiff = Math.max(maxScoreLeft - (4 - minGroup.numChosen()) * (maxGoalDiff - 2), minGoalDiff)
+		var maxDiff = Math.min(minScoreLeft - (4 - maxGroup.numChosen()) * (minGoalDiff + 2), maxGoalDiff)
 
-
-		var possible_diffs = []
-		for(var i = min_diff; i <= max_diff; i++)
+		var possibleDiffs = []
+		for (var i = minDiff; i <= maxDiff; i++)
 		{
-			if(!containsCloseToDiff(intersecting_goals, i))
+			if (!containsCloseToDiff(intersectingGoals, i))
 			{
-				possible_diffs.push(i)
+				possibleDiffs.push(i)
 			}
 		}
-		if(possible_diffs.length == 0)
+		if (possibleDiffs.length == 0)
 		{
-			for(var i = min_diff; i <= max_diff; i++)
+			for (var i = minDiff; i <= maxDiff; i++)
 			{
-				possible_diffs.push(i)
+				possibleDiffs.push(i)
 			}
 		}
-		if(possible_diffs.length == 0)
+		if (possibleDiffs.length == 0)
 		{
-			possible_diffs.push(min_diff)
+			possibleDiffs.push(minDiff)
 		}
 
-		diff = possible_diffs[Math.floor(RandomGen.random() * possible_diffs.length)]
+		diff = possibleDiffs[Math.floor(RandomGen.random() * possibleDiffs.length)]
 	}
 
-	var correct_diff_goals = searchForGoals(available_goals, [diff], target_diff, groups)
+	var correctDiffGoals = searchForGoals(availableGoals, [diff], targetDiff, groups)
 
-	if(correct_diff_goals.length == 0)
+	if (correctDiffGoals.length == 0)
 	{
-		for(var i = 0; i <= max_goal_diff; i++)
+		for (var i = 0; i <= maxGoalDiff; i++)
 		{
-			var new_diffs = [diff + i, diff - i];
-			correct_diff_goals = searchForGoals(available_goals, new_diffs, target_diff, groups)
-			if(correct_diff_goals.length > 0)
+			var newDiffs = [diff + i, diff - i];
+			correctDiffGoals = searchForGoals(availableGoals, newDiffs, targetDiff, groups)
+			if (correctDiffGoals.length > 0)
 			{
-				return correct_diff_goals[Math.floor(RandomGen.random() * correct_diff_goals.length)]
+				return correctDiffGoals[Math.floor(RandomGen.random() * correctDiffGoals.length)]
 			}
 		}
 		console.log("FATAL: All goals found to be impossible.")
 	}
 	else
 	{
-		return correct_diff_goals[Math.floor(RandomGen.random() * correct_diff_goals.length)]
+		return correctDiffGoals[Math.floor(RandomGen.random() * correctDiffGoals.length)]
 	}
 }
 
-function searchForGoals(available_goals, diffs, target_diff, groups)
+function searchForGoals(availableGoals, diffs, targetDiff, groups)
 {
-	var correct_diff_goals = []
-	for(var goal_idx = 0; goal_idx < available_goals.length; goal_idx++)
+	var correctDiffGoals = []
+	for (var goalIndex = 0; goalIndex < availableGoals.length; goalIndex++)
 	{
-		if(available_goals[goal_idx].hasOwnProperty("synergies"))
+		if (availableGoals[goalIndex].hasOwnProperty("synergies"))
 		{
-			var goal = available_goals[goal_idx]
-			var is_correct_diff = false
-			for(var group_idx = 0; group_idx < groups.length; group_idx++)
+			var goal = availableGoals[goalIndex]
+			var isCorrectDiff = false
+			for (var groupIndex = 0; groupIndex < groups.length; groupIndex++)
 			{
-				if(!groups[group_idx].is_possible(goal, target_diff))
+				if (!groups[groupIndex].isPossible(goal, targetDiff))
 				{
-					is_correct_diff = false
+					isCorrectDiff = false
 					break;
 				}
-				if(diffs.includes(groups[group_idx].get_additional_diff(goal)))
+				if (diffs.includes(groups[groupIndex].getAdditionalDiff(goal)))
 				{
-					is_correct_diff = true
+					isCorrectDiff = true
 				}
 			}
-			if(is_correct_diff)
+			if (isCorrectDiff)
 			{
-				correct_diff_goals.push(goal)
+				correctDiffGoals.push(goal)
 			}
 		}
 		else
 		{
-			if(diffs.includes(available_goals[goal_idx].diff))
+			if (diffs.includes(availableGoals[goalIndex].diff))
 			{
-				correct_diff_goals.push(available_goals[goal_idx])
+				correctDiffGoals.push(availableGoals[goalIndex])
 			}
 		}
 	}
-	return correct_diff_goals
+	return correctDiffGoals
 }
 
 function containsDiff(grid, diff)
 {
-	var flattened_grid = grid.flatten()
-	var diffs = flattened_grid.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
+	var flattenedGrid = grid.flatten()
+	var diffs = flattenedGrid.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
 	return diffs.indexOf(diff) != -1
 }
 
 function containsCloseToDiff(list, diff)
 {
 	var diffs = list.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
-	for(var i = 0; i < diffs.length; i++)
+	for (var i = 0; i < diffs.length; i++)
 	{
-		if(Math.abs(diff - diffs[i]) < 3.0)
+		if (Math.abs(diff - diffs[i]) < 3.0)
 		{
 			return true
 		}
@@ -483,12 +482,12 @@ class BingoGoal
 {
 	constructor()
 	{
-		this.is_valid = false
+		this.isValid = false
 	}
 
 	setGoal(goal)
 	{
-		this.is_valid = true
+		this.isValid = true
 		this.name = goal.name
 		this.desc = goal.desc
 		this.diff = goal.diff
@@ -509,15 +508,16 @@ class BingoGroup
 	{
 		var diffs = []
 		var synergies = []
-		for(var i = 0; i < this.goals.length; i++)
+		for (var i = 0; i < this.goals.length; i++)
 		{
-			if(!this.goals[i].is_valid) continue
-			if(this.goals[i].hasOwnProperty("synergies"))
+			if (!this.goals[i].isValid)
+				continue
+			if (this.goals[i].hasOwnProperty("synergies"))
 			{
 				var diff = this.goals[i].diff
 				for (const key in this.goals[i].synergies)
 				{
-					if(synergies.indexOf(key) == -1)
+					if (synergies.indexOf(key) == -1)
 					{
 						synergies.push(key)
 					}
@@ -544,13 +544,13 @@ class BingoGroup
 	synergies()
 	{
 		var synergies = []
-		for(var i = 0; i < this.goals.length; i++)
+		for (var i = 0; i < this.goals.length; i++)
 		{
-			if(this.goals[i].hasOwnProperty("synergies"))
+			if (this.goals[i].hasOwnProperty("synergies"))
 			{
-				for(const key in this.goals[i].synergies)
+				for (const key in this.goals[i].synergies)
 				{
-					if(!synergies.includes(key))
+					if (!synergies.includes(key))
 					{
 						synergies.push(key)
 					}
@@ -563,17 +563,17 @@ class BingoGroup
 	types()
 	{
 		var types = []
-		for(var i = 0; i < this.goals.length; i++)
+		for (var i = 0; i < this.goals.length; i++)
 		{
-			var curr_goal = this.goals[i]
-			if(curr_goal.hasOwnProperty("types"))
+			var currGoal = this.goals[i]
+			if (currGoal.hasOwnProperty("types"))
 			{
-				for(var j = 0; j < curr_goal.types.length; j++)
+				for (var j = 0; j < currGoal.types.length; j++)
 				{
-					var curr_type = curr_goal.types[j]
-					if(!types.includes(curr_type))
+					var currType = currGoal.types[j]
+					if (!types.includes(currType))
 					{
-						types.push(curr_type)
+						types.push(currType)
 					}
 				}
 			}
@@ -584,46 +584,49 @@ class BingoGroup
 	hasTwoCubeGoals()
 	{
 		var types = this.types()
-		var num_goals = 0
-		if(types.includes("num_cubes")) num_goals++
-		if(types.includes("num_anti")) num_goals++
-		if(types.includes("num_golden")) num_goals ++
-		return (num_goals > 2)
+		var numGoals = 0
+		if (types.includes("num_cubes"))
+			numGoals++
+		if (types.includes("num_anti"))
+			numGoals++
+		if (types.includes("num_golden"))
+			numGoals++
+		return (numGoals >= 2)
 	}
 
 	numChosen()
 	{
-		return this.goals.reduce(function f(acc, x) { return x.is_valid ? acc + 1 : acc }, 0)
+		return this.goals.reduce(function f(acc, x) { return x.isValid ? acc + 1 : acc }, 0)
 	}
 
 	chosenGoals()
 	{
-		return this.goals.reduce(function f(acc, x) { return x.is_valid ? acc.concat(x) : acc }, [])
+		return this.goals.reduce(function f(acc, x) { return x.isValid ? acc.concat(x) : acc }, [])
 	}
 
-	get_additional_diff(goal)
+	getAdditionalDiff(goal)
 	{
 		var synergies = this.synergies()
-		var goal_diff = goal.diff
-		if(goal.hasOwnProperty("synergies"))
+		var goalDiff = goal.diff
+		if (goal.hasOwnProperty("synergies"))
 		{
-			for(const key in goal.synergies)
+			for (const key in goal.synergies)
 			{
-				if(synergies.includes(key))
+				if (synergies.includes(key))
 				{
-					goal_diff += goal.synergies[key]
+					goalDiff += goal.synergies[key]
 				}
 			}
 		}
-		return goal_diff
+		return goalDiff
 	}
 
-	is_possible(goal, target_diff)
+	isPossible(goal, targetDiff)
 	{
-		var goals_left = 4 - this.chosenGoals()
-		var total_diff = this.diffSum() + this.get_additional_diff(goal)
-		var diff_remaining_per_goal = (target_diff - total_diff) / goals_left
-		if((diff_remaining_per_goal > 24) || (diff_remaining_per_goal < 2))
+		var goalsLeft = 4 - this.chosenGoals()
+		var totalDiff = this.diffSum() + this.getAdditionalDiff(goal)
+		var diffRemainingPerGoal = (targetDiff - totalDiff) / goalsLeft
+		if ((diffRemainingPerGoal > 24) || (diffRemainingPerGoal < 2))
 		{
 			return false
 		}

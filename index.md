@@ -44,7 +44,7 @@ Enjoy!
 				seedText.value = ""
 			}
 		}
-		let newBoard = bingoGeneratorCustom(JSON.parse(JSON.stringify(bingo_list_custom)), opts)
+		let newBoard = bingoGeneratorCustom(JSON.parse(JSON.stringify(bingoListCustom)), opts)
 		let json = []
 		for (i = 0; i < 25; i++)
 		{
