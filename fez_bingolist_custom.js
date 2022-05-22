@@ -1,4 +1,4 @@
-var bingoListCustom = {
+var bingoList = {
 	"bingoTypes": {
 		"end_goals": {"max": 1},
 		"num_obelisks": {"max": 1},
