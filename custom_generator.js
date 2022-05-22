@@ -1,13 +1,13 @@
 // Custom bingo generator, taking into account dynamic difficulty.
 // Some code taken from SynerGen
 
-var RandomGen = {};
+let RandomGen = {};
 (function(j, i, g, m, k, n, o) { function q(b) { var e, f, a = this, c = b.length, d = 0, h = a.i = a.j = a.m = 0; a.S = []; a.c = []; for (c || (b = [c++]); d < g;) a.S[d] = d++; for (d = 0; d < g; d++) e = a.S[d], h = h + e + b[d % c] & g - 1, f = a.S[h], a.S[d] = f, a.S[h] = e; a.g = function(b) { var c = a.S, d = a.i + 1 & g - 1, e = c[d], f = a.j + e & g - 1, h = c[f]; c[d] = h; c[f] = e; for (var i = c[e + h & g - 1]; --b;) d = d + 1 & g - 1, e = c[d], f = f + e & g - 1, h = c[f], c[d] = h, c[f] = e, i = i * g + c[e + h & g - 1]; a.i = d; a.j = f; return i }; a.g(g) } function p(b, e, f, a, c) { f = []; c = typeof b; if (e && c == "object") for (a in b) if (a.indexOf("S") < 5) try { f.push(p(b[a], e - 1)) } catch (d) {} return f.length ? f : b + (c != "string" ? "\0" : "") } function l(b, e, f, a) { b += ""; for (a = f = 0; a < b.length; a++) { var c = e, d = a & g - 1, h = (f ^= e[a & g - 1] * 19) + b.charCodeAt(a); c[d] = h & g - 1 } b = ""; for (a in e) b += String.fromCharCode(e[a]); return b } i.seedrandom = function(b, e) { var f = [], a; b = l(p(e ? [b, j] : arguments.length ? b : [(new Date).getTime(), j, window], 3), f); a = new q(f); l(a.S, j); i.random = function() { for (var c = a.g(m), d = o, b = 0; c < k;) c = (c + b) * g, d *= g, b = a.g(1); for (; c >= n;) c /= 2, d /= 2, b >>>= 1; return (c + b) / d }; return b }; o = Math.pow(g, m); k = Math.pow(2, k); n = k * 2; l(Math.random(), j) })([], RandomGen, 256, 6, 52);
 
 bingoGeneratorCustom = function(bingoList, opts)
 {
 	// Make sure everything exists that should, pull out bingoTypes from bingoList
-	var bingoTypes = bingoList.bingoTypes
+	let bingoTypes = bingoList.bingoTypes
 	delete bingoList.bingoTypes
 	preprocessBingoList(bingoList)
 
@@ -15,7 +15,7 @@ bingoGeneratorCustom = function(bingoList, opts)
 	seed = RandomGen.seedrandom(opts.seed || Math.ceil(999999 * Math.random()));
 
 	// Create counts for all types
-	var types = {}
+	let types = {}
 	for (const key of Object.keys(bingoTypes))
 	{
 		if (!bingoTypes[key].hasOwnProperty("max"))
@@ -23,16 +23,17 @@ bingoGeneratorCustom = function(bingoList, opts)
 		types[key] = bingoTypes[key].max
 	}
 
-	var scoreTarget = 60
+	let scoreTarget = 60
 
-	var board
-	var metTarget = false
+	let board
+	let diffSums
+	let metTarget = false
 
 	// Do a number of iterations until we find suitable board.
-	for (var i = 0; i < 1000; i++)
+	for (let i = 0; i < 1000; i++)
 	{
 		board = createBoard(scoreTarget, bingoList)
-		var diffSums = []
+		diffSums = []
 
 		diffSums.push(getRow(board, 0).diffSum())
 		diffSums.push(getRow(board, 1).diffSum())
@@ -65,10 +66,10 @@ bingoGeneratorCustom = function(bingoList, opts)
 	console.log("Max: ", Math.max(...diffSums))
 	console.log("Min: ", Math.min(...diffSums))
 
-	var goalsList = []
-	for (var rowIndex = 0; rowIndex < 5; rowIndex++)
+	let goalsList = []
+	for (let rowIndex = 0; rowIndex < 5; rowIndex++)
 	{
-		for (var colIndex = 0; colIndex < 5; colIndex++)
+		for (let colIndex = 0; colIndex < 5; colIndex++)
 		{
 			goalsList.push({"name": board[rowIndex][colIndex].desc})
 		}
@@ -141,7 +142,7 @@ function getCol(grid, colIndex)
  */
 function getGroups(grid, rowIndex, colIndex)
 {
-	var groups = [getRow(grid, rowIndex), getCol(grid, colIndex)]
+	let groups = [getRow(grid, rowIndex), getCol(grid, colIndex)]
 	// The TL-BR diagonal's cells all have the same row and column number.
 	if (rowIndex == colIndex)
 		groups.push(getTLBR(grid))
@@ -153,7 +154,7 @@ function getGroups(grid, rowIndex, colIndex)
 
 function selectRandomGoal(goals)
 {
-	var index = Math.floor(RandomGen.random() * goals.length)
+	let index = Math.floor(RandomGen.random() * goals.length)
 	return goals[index]
 }
 
@@ -179,7 +180,7 @@ function preprocessBingoList(bingoList) {
 function createBoard(scoreTarget, bingoList)
 {
 	// Create a 5x5 grid of empty objects.
-	var board = Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => new BingoGoal()))
+	let board = Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => new BingoGoal()))
 
 	const fillingOrder = [
 		[2, 2],
@@ -209,13 +210,13 @@ function createBoard(scoreTarget, bingoList)
 		[0, 3]
 	]
 
-	var unchosenGoals = {...bingoList}
+	let unchosenGoals = {...bingoList}
 
-	for (var i = 0; i < fillingOrder.length; i++)
+	for (let i = 0; i < fillingOrder.length; i++)
 	{
-		var rowIndex = fillingOrder[i][0]
-		var colIndex = fillingOrder[i][1]
-		var goal = selectGoal(board, rowIndex, colIndex, scoreTarget, unchosenGoals)
+		let rowIndex = fillingOrder[i][0]
+		let colIndex = fillingOrder[i][1]
+		let goal = selectGoal(board, rowIndex, colIndex, scoreTarget, unchosenGoals)
 		board[rowIndex][colIndex].setGoal(goal)
 		// Remove the chosen goal from the available goals.
 		for (const key in unchosenGoals)
@@ -236,14 +237,14 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 	const maxGoalDiff = 25
 	const minGoalDiff = 1
 
-	var groups = getGroups(grid, rowIndex, colIndex)
-	var intersectingGoals = groups.reduce(function f(acc, x) { return acc.concat(x.chosenGoals()) }, [])
-	var intersectingGoalNames = intersectingGoals.reduce(function f(acc, x) { return acc.concat(x.name) }, [])
+	let groups = getGroups(grid, rowIndex, colIndex)
+	let intersectingGoals = groups.reduce(function f(acc, x) { return acc.concat(x.chosenGoals()) }, [])
+	let intersectingGoalNames = intersectingGoals.reduce(function f(acc, x) { return acc.concat(x.name) }, [])
 
 	// Get all the constraints from cells that are already filled in.
-	var chosenTypes = []
-	var excludes = []
-	for (var i = 0; i < intersectingGoals.length; i++)
+	let chosenTypes = []
+	let excludes = []
+	for (let i = 0; i < intersectingGoals.length; i++)
 	{
 		if (intersectingGoals[i].hasOwnProperty("types"))
 		{
@@ -256,7 +257,7 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 	}
 
 	// If any group this intersects with has 2 cube collection goals already, do not let it have a third.
-	for (var i = 0; i < groups.length; i++)
+	for (let i = 0; i < groups.length; i++)
 	{
 		if (groups[i].hasTwoCubeGoals())
 		{
@@ -266,14 +267,14 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 	}
 
 	// Put all the available goals into a list.
-	var availableGoals = []
+	let availableGoals = []
 	for (const key in unchosen)
 	{
-		var currGoal = unchosen[key]
-		var isValid = true
+		let currGoal = unchosen[key]
+		let isValid = true
 		if (currGoal.hasOwnProperty("types"))
 		{
-			for (var i = 0; i < currGoal.types.length; i++)
+			for (let i = 0; i < currGoal.types.length; i++)
 			{
 				if (chosenTypes.includes(currGoal.types[i]))
 				{
@@ -283,7 +284,7 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 		}
 		if (currGoal.hasOwnProperty("excludes"))
 		{
-			for (var i = 0; i < currGoal.excludes.length; i++)
+			for (let i = 0; i < currGoal.excludes.length; i++)
 			{
 				if (intersectingGoalNames.includes(currGoal.excludes[i]))
 				{
@@ -302,11 +303,11 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 	}
 
 	// Get the groups that have the largest number of elements.
-	var biggestGroups = []
-	var numChosenInBiggestGroup = -1
-	for (var i = 0; i < groups.length; i++)
+	let biggestGroups = []
+	let numChosenInBiggestGroup = -1
+	for (let i = 0; i < groups.length; i++)
 	{
-		var numChosenInCurrGroup = groups[i].numChosen()
+		let numChosenInCurrGroup = groups[i].numChosen()
 		if (numChosenInCurrGroup > numChosenInBiggestGroup)
 		{
 			biggestGroups = [groups[i]]
@@ -318,9 +319,9 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 		}
 	}
 
-	var biggestGroupDiffs = biggestGroups.reduce(function f(acc, x) { return acc.concat(x.diffSum()) }, [])
+	let biggestGroupDiffs = biggestGroups.reduce(function f(acc, x) { return acc.concat(x.diffSum()) }, [])
 
-	var diff
+	let diff
 
 	if (numChosenInBiggestGroup == 4)
 	{
@@ -340,10 +341,10 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 	else
 	{
 		// The groups with the max and min sums, so far.
-		var maxGroup = groups[0]
-		var minGroup = groups[0]
+		let maxGroup = groups[0]
+		let minGroup = groups[0]
 
-		for (var i = 1; i < groups.length; i++)
+		for (let i = 1; i < groups.length; i++)
 		{
 			if (groups[i].diffSum() > maxGroup.diffSum())
 			{
@@ -357,13 +358,13 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 
 		// Find the minimum and mximum possible difficulty values, assuming the remaining goals are all filled in with
 		// the maximum or minimum possible.
-		var minScoreLeft = targetDiff - maxGroup.diffSum()
-		var maxScoreLeft = targetDiff - minGroup.diffSum()
-		var minDiff = Math.max(maxScoreLeft - (4 - minGroup.numChosen()) * (maxGoalDiff - 2), minGoalDiff)
-		var maxDiff = Math.min(minScoreLeft - (4 - maxGroup.numChosen()) * (minGoalDiff + 2), maxGoalDiff)
+		let minScoreLeft = targetDiff - maxGroup.diffSum()
+		let maxScoreLeft = targetDiff - minGroup.diffSum()
+		let minDiff = Math.max(maxScoreLeft - (4 - minGroup.numChosen()) * (maxGoalDiff - 2), minGoalDiff)
+		let maxDiff = Math.min(minScoreLeft - (4 - maxGroup.numChosen()) * (minGoalDiff + 2), maxGoalDiff)
 
-		var possibleDiffs = []
-		for (var i = minDiff; i <= maxDiff; i++)
+		let possibleDiffs = []
+		for (let i = minDiff; i <= maxDiff; i++)
 		{
 			if (!containsCloseToDiff(intersectingGoals, i))
 			{
@@ -372,7 +373,7 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 		}
 		if (possibleDiffs.length == 0)
 		{
-			for (var i = minDiff; i <= maxDiff; i++)
+			for (let i = minDiff; i <= maxDiff; i++)
 			{
 				possibleDiffs.push(i)
 			}
@@ -385,13 +386,13 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 		diff = possibleDiffs[Math.floor(RandomGen.random() * possibleDiffs.length)]
 	}
 
-	var correctDiffGoals = searchForGoals(availableGoals, [diff], targetDiff, groups)
+	let correctDiffGoals = searchForGoals(availableGoals, [diff], targetDiff, groups)
 
 	if (correctDiffGoals.length == 0)
 	{
-		for (var i = 0; i <= maxGoalDiff; i++)
+		for (let i = 0; i <= maxGoalDiff; i++)
 		{
-			var newDiffs = [diff + i, diff - i];
+			let newDiffs = [diff + i, diff - i];
 			correctDiffGoals = searchForGoals(availableGoals, newDiffs, targetDiff, groups)
 			if (correctDiffGoals.length > 0)
 			{
@@ -408,14 +409,14 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 
 function searchForGoals(availableGoals, diffs, targetDiff, groups)
 {
-	var correctDiffGoals = []
-	for (var goalIndex = 0; goalIndex < availableGoals.length; goalIndex++)
+	let correctDiffGoals = []
+	for (let goalIndex = 0; goalIndex < availableGoals.length; goalIndex++)
 	{
 		if (availableGoals[goalIndex].hasOwnProperty("synergies"))
 		{
-			var goal = availableGoals[goalIndex]
-			var isCorrectDiff = false
-			for (var groupIndex = 0; groupIndex < groups.length; groupIndex++)
+			let goal = availableGoals[goalIndex]
+			let isCorrectDiff = false
+			for (let groupIndex = 0; groupIndex < groups.length; groupIndex++)
 			{
 				if (!groups[groupIndex].isPossible(goal, targetDiff))
 				{
@@ -445,15 +446,15 @@ function searchForGoals(availableGoals, diffs, targetDiff, groups)
 
 function containsDiff(grid, diff)
 {
-	var flattenedGrid = grid.flatten()
-	var diffs = flattenedGrid.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
+	let flattenedGrid = grid.flatten()
+	let diffs = flattenedGrid.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
 	return diffs.indexOf(diff) != -1
 }
 
 function containsCloseToDiff(list, diff)
 {
-	var diffs = list.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
-	for (var i = 0; i < diffs.length; i++)
+	let diffs = list.reduce(function f(x, y) { return y.hasOwnProperty("diff") ? x.concat(y.diff) : x }, [])
+	for (let i = 0; i < diffs.length; i++)
 	{
 		if (Math.abs(diff - diffs[i]) < 3.0)
 		{
@@ -506,15 +507,15 @@ class BingoGroup
 
 	diffs()
 	{
-		var diffs = []
-		var synergies = []
-		for (var i = 0; i < this.goals.length; i++)
+		let diffs = []
+		let synergies = []
+		for (let i = 0; i < this.goals.length; i++)
 		{
 			if (!this.goals[i].isValid)
 				continue
 			if (this.goals[i].hasOwnProperty("synergies"))
 			{
-				var diff = this.goals[i].diff
+				let diff = this.goals[i].diff
 				for (const key in this.goals[i].synergies)
 				{
 					if (synergies.indexOf(key) == -1)
@@ -543,8 +544,8 @@ class BingoGroup
 
 	synergies()
 	{
-		var synergies = []
-		for (var i = 0; i < this.goals.length; i++)
+		let synergies = []
+		for (let i = 0; i < this.goals.length; i++)
 		{
 			if (this.goals[i].hasOwnProperty("synergies"))
 			{
@@ -562,15 +563,15 @@ class BingoGroup
 
 	types()
 	{
-		var types = []
-		for (var i = 0; i < this.goals.length; i++)
+		let types = []
+		for (let i = 0; i < this.goals.length; i++)
 		{
-			var currGoal = this.goals[i]
+			let currGoal = this.goals[i]
 			if (currGoal.hasOwnProperty("types"))
 			{
-				for (var j = 0; j < currGoal.types.length; j++)
+				for (let j = 0; j < currGoal.types.length; j++)
 				{
-					var currType = currGoal.types[j]
+					let currType = currGoal.types[j]
 					if (!types.includes(currType))
 					{
 						types.push(currType)
@@ -583,8 +584,8 @@ class BingoGroup
 
 	hasTwoCubeGoals()
 	{
-		var types = this.types()
-		var numGoals = 0
+		let types = this.types()
+		let numGoals = 0
 		if (types.includes("num_cubes"))
 			numGoals++
 		if (types.includes("num_anti"))
@@ -606,8 +607,8 @@ class BingoGroup
 
 	getAdditionalDiff(goal)
 	{
-		var synergies = this.synergies()
-		var goalDiff = goal.diff
+		let synergies = this.synergies()
+		let goalDiff = goal.diff
 		if (goal.hasOwnProperty("synergies"))
 		{
 			for (const key in goal.synergies)
@@ -623,9 +624,9 @@ class BingoGroup
 
 	isPossible(goal, targetDiff)
 	{
-		var goalsLeft = 4 - this.chosenGoals()
-		var totalDiff = this.diffSum() + this.getAdditionalDiff(goal)
-		var diffRemainingPerGoal = (targetDiff - totalDiff) / goalsLeft
+		let goalsLeft = 4 - this.chosenGoals()
+		let totalDiff = this.diffSum() + this.getAdditionalDiff(goal)
+		let diffRemainingPerGoal = (targetDiff - totalDiff) / goalsLeft
 		if ((diffRemainingPerGoal > 24) || (diffRemainingPerGoal < 2))
 		{
 			return false
