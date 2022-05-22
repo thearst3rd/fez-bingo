@@ -17,8 +17,8 @@ Enjoy!
 </div>
 <input id="copy-button" type="button" value="Copy to Clipboard"/>
 <p id="copied-text" style="visibility: hidden">Copied!</p>
-<script src="synergen.js"></script>
-<script src="fez_bingolist_synergen.js"></script>
+<script src="custom_generator.js"></script>
+<script src="fez_bingolist_custom.js"></script>
 <script>
 	const seedText = document.getElementById("seed-text")
 	const generateButton = document.getElementById("generate-button")
@@ -44,8 +44,7 @@ Enjoy!
 				seedText.value = ""
 			}
 		}
-		console.log("Generating...")
-		let newBoard = bingoGeneratorSynerGen(JSON.parse(JSON.stringify(bingoListSynerGen)), opts)
+		let newBoard = bingoGeneratorCustom(JSON.parse(JSON.stringify(bingo_list_custom)), opts)
 		let json = []
 		for (i = 0; i < 25; i++)
 		{
