@@ -10,6 +10,12 @@ Enjoy!
 	<input id="seed-text" value="" placeholder="Seed (blank for random)"/>
 </div>
 <div>
+	<input id="bingo-mode-normal" type="radio" value="Normal" name="bingo-mode" checked="checked">
+	<label for="bingo-mode-normal">Normal</label><br>
+	<input id="bingo-mode-blackout" type="radio" value="Blackout" name="bingo-mode">
+	<label for="bingo-mode-blackout">Blackout</label><br>
+</div>
+<div>
 	<input id="generate-button" type="button" value="Generate New Board"/>
 </div>
 <div>
@@ -21,6 +27,7 @@ Enjoy!
 <script src="fez_bingolist_custom.js"></script>
 <script>
 	const seedText = document.getElementById("seed-text")
+	const blackoutMode = document.getElementByID("bingo-mode-blackout")
 	const generateButton = document.getElementById("generate-button")
 	const outputTextarea = document.getElementById("output-textarea")
 	const copyButton = document.getElementById("copy-button")
@@ -29,6 +36,8 @@ Enjoy!
 	{
 		// Generate board
 		let opts = {}
+		if (blackoutMode.checked)
+		opts.blackout = true
 		if (seedText.value.length > 0)
 		{
 			let seed = parseInt(seedText.value)

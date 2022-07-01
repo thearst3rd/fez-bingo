@@ -29,42 +29,57 @@ bingoGenerator = function(bingoList, opts)
 	let diffSums
 	let metTarget = false
 
-	// Do a number of iterations until we find suitable board.
-	for (let i = 0; i < 1000; i++)
+	if (opts.blackout) 
 	{
-		board = createBoard(scoreTarget, bingoList)
-		diffSums = []
-
-		diffSums.push(getRow(board, 0).diffSum())
-		diffSums.push(getRow(board, 1).diffSum())
-		diffSums.push(getRow(board, 2).diffSum())
-		diffSums.push(getRow(board, 3).diffSum())
-		diffSums.push(getRow(board, 4).diffSum())
-		diffSums.push(getCol(board, 0).diffSum())
-		diffSums.push(getCol(board, 1).diffSum())
-		diffSums.push(getCol(board, 2).diffSum())
-		diffSums.push(getCol(board, 3).diffSum())
-		diffSums.push(getCol(board, 4).diffSum())
-		diffSums.push(getTLBR(board).diffSum())
-		diffSums.push(getTRBL(board).diffSum())
-
-		// It's ok if a column is slightly too hard, but we really don't want a column to be too easy since all runners
-		// will likely go with that column. So, we bias the score target just a little bit higher
-		if ((Math.min(...diffSums) > scoreTarget - 5) && (Math.max(...diffSums) < scoreTarget + 10))
+		for (let i = 0; i < 100; i++)
 		{
-			metTarget = true
-			break
+			board = createBlackoutBoard(bingoList)
+			if (board)
+			{
+				metTarget = true
+				break
+			}
 		}
 	}
+	else
+	{
+		// Do a number of iterations until we find suitable board.
+		for (let i = 0; i < 1000; i++)
+		{
+			board = createBoard(scoreTarget, bingoList)
+			diffSums = []
 
+			diffSums.push(getRow(board, 0).diffSum())
+			diffSums.push(getRow(board, 1).diffSum())
+			diffSums.push(getRow(board, 2).diffSum())
+			diffSums.push(getRow(board, 3).diffSum())
+			diffSums.push(getRow(board, 4).diffSum())
+			diffSums.push(getCol(board, 0).diffSum())
+			diffSums.push(getCol(board, 1).diffSum())
+			diffSums.push(getCol(board, 2).diffSum())
+			diffSums.push(getCol(board, 3).diffSum())
+			diffSums.push(getCol(board, 4).diffSum())
+			diffSums.push(getTLBR(board).diffSum())
+			diffSums.push(getTRBL(board).diffSum())
+
+			// It's ok if a column is slightly too hard, but we really don't want a column to be too easy since all runners
+			// will likely go with that column. So, we bias the score target just a little bit higher
+			if ((Math.min(...diffSums) > scoreTarget - 5) && (Math.max(...diffSums) < scoreTarget + 10))
+			{
+				metTarget = true
+				break
+			}
+
+			console.log(diffSums)
+			console.log("Max: ", Math.max(...diffSums))
+			console.log("Min: ", Math.min(...diffSums))
+		}	
+	}
+	
 	if (!metTarget)
 	{
 		console.log("WARNING: Board did not meet requirements.")
 	}
-
-	console.log(diffSums)
-	console.log("Max: ", Math.max(...diffSums))
-	console.log("Min: ", Math.min(...diffSums))
 
 	let goalsList = []
 	for (let rowIndex = 0; rowIndex < 5; rowIndex++)
@@ -174,6 +189,136 @@ function preprocessBingoList(bingoList) {
 
 		if (!bingoList[key].hasOwnProperty("excludes"))
 			bingoList[key].excludes = []
+	}
+}
+
+function createBlackoutBoard(bingoList)
+{
+	// Create a 5x5 grid of empty objects.
+	let board = Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => new BingoGoal()))
+
+	let unchosenGoals = {...bingoList}
+
+	// For blackout, since it is time-limited, remove any end goals.
+	for (const key in unchosenGoals)
+	{
+		goal = unchosenGoals[key]
+		if (goal.hasOwnProperty("types") && goal.types.includes("end_goals"))
+		delete unchosenGoals[key]
+	}
+
+	let min_diff = 1
+	let max_diff = 5
+	for (let row_idx = 0; row_idx < 5; row_idx++)
+	{
+		for (let col_idx = 0; col_idx < 5; col_idx++)
+		{
+			let random_diff = Math.floor((RandomGen.random() * (max_diff - min_diff) + min_diff))
+			let goal = selectBlackoutGoal(board, random_diff, unchosenGoals)
+			// If we somehow failed to select a goal, return undefined and try the whole thing over again.
+			if (!goal) return undefined
+			board[row_idx][col_idx].setGoal(goal)
+			// Remove the chosen goal from the available goals.
+			for (const key in unchosenGoals)
+			{
+				if (unchosenGoals[key] == goal)
+				{
+					delete unchosenGoals[key]
+				}
+			}
+		}
+		min_diff = min_diff + 5
+		max_diff = max_diff + 5
+	}
+
+	return board
+}
+
+function selectBlackoutGoal(grid, diff, unchosen)
+{
+	let groups = [getRow(grid, 0), getRow(grid, 1), getRow(grid, 2), getRow(grid, 3), getRow(grid, 4)]
+	let intersectingGoals = groups.reduce(function f(acc, x) { return acc.concat(x.chosenGoals()) }, [])
+	let intersectingGoalNames = intersectingGoals.reduce(function f(acc, x) { return acc.concat(x.name) }, [])
+
+	// Get all the constraints from cells that are already filled in.
+	let chosenTypes = []
+	let excludes = []
+	for (let i = 0; i < intersectingGoals.length; i++)
+	{
+		if (intersectingGoals[i].hasOwnProperty("types"))
+		{
+			chosenTypes.push(...intersectingGoals[i].types)
+		}
+		if (intersectingGoals[i].hasOwnProperty("excludes"))
+		{
+			excludes.push(...intersectingGoals[i].excludes)
+		}
+	}
+
+	// If any group this intersects with has 2 cube collection goals already, do not let it have a third.
+	for (let i = 0; i < groups.length; i++)
+	{
+		if (groups[i].hasTwoCubeGoals())
+		{
+			excludes.push("num_golden", "num_anti", "num_cubes")
+			break
+		}
+	}
+
+	// Put all the available goals into a list.
+	let availableGoals = []
+	for (const key in unchosen)
+	{
+		let currGoal = unchosen[key]
+		let isValid = true
+		if (currGoal.hasOwnProperty("types"))
+		{
+			for (let i = 0; i < currGoal.types.length; i++)
+			{
+				if (chosenTypes.includes(currGoal.types[i]))
+				{
+					isValid = false
+				}
+			}
+		}
+		if (currGoal.hasOwnProperty("excludes"))
+		{
+			for (let i = 0; i < currGoal.excludes.length; i++)
+			{
+				if (intersectingGoalNames.includes(currGoal.excludes[i]))
+				{
+					isValid = false
+				}
+			}
+		}
+		if (excludes.includes(key))
+		{
+			isValid = false
+		}
+		if (isValid)
+		{
+			availableGoals.push(unchosen[key])
+		}
+	}
+
+	let correctDiffGoals = searchForGoals(availableGoals, [diff], 0, grid, false)
+
+	if (correctDiffGoals.length == 0)
+	{
+		for (let i = 0; i <= 3; i++)
+		{
+			let newDiffs = [diff + i, diff - i];
+			correctDiffGoals = searchForGoals(availableGoals, newDiffs, 0, grid, false)
+			if (correctDiffGoals.length > 0)
+			{
+				return correctDiffGoals[Math.floor(RandomGen.random() * correctDiffGoals.length)]
+			}
+		}
+		console.log("FATAL: All goals found to be impossible.")
+	}
+	else
+	{
+		return correctDiffGoals[Math.floor(RandomGen.random() * correctDiffGoals.length)]
 	}
 }
 
@@ -407,12 +552,12 @@ function selectGoal(grid, rowIndex, colIndex, targetDiff, unchosen)
 	}
 }
 
-function searchForGoals(availableGoals, diffs, targetDiff, groups)
+function searchForGoals(availableGoals, diffs, targetDiff, groups, use_synergy=true)
 {
 	let correctDiffGoals = []
 	for (let goalIndex = 0; goalIndex < availableGoals.length; goalIndex++)
 	{
-		if (availableGoals[goalIndex].hasOwnProperty("synergies"))
+		if (use_synergy && availableGoals[goalIndex].hasOwnProperty("synergies"))
 		{
 			let goal = availableGoals[goalIndex]
 			let isCorrectDiff = false
