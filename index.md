@@ -27,7 +27,7 @@ Enjoy!
 <script src="fez_bingolist_custom.js"></script>
 <script>
 	const seedText = document.getElementById("seed-text")
-	const blackoutMode = document.getElementByID("bingo-mode-blackout")
+	const blackoutMode = document.getElementById("bingo-mode-blackout")
 	const generateButton = document.getElementById("generate-button")
 	const outputTextarea = document.getElementById("output-textarea")
 	const copyButton = document.getElementById("copy-button")
