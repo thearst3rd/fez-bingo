@@ -20,13 +20,13 @@ var bingoList = {
 	 * golden cube is much faster than getting the writing artifact, even though they are both one room away from the
 	 * Waterfall hub. This is because in order to get back to the nature hub from the writing artifact room, the player
 	 * must go back through the Waterfall main area, whereas the infinite fall room has a little gate inside of it.
-	 * 
+	 *
 	 * So, the general system for scoring goals is the sum of:
 	 * - How many rooms it takes to get to that goal's hub (also called the base score).
 	 * - How many room transitions it takes to get the goal and return to a hub.
 	 * - Extra factors for things like how long an individual room is, whether or not there are prerequisites (i.e.
 	 *   lowering the water level or getting a key).
-	 * 
+	 *
 	 * Medium rooms count as 1 extra, Long as 2 extra, Extra-Long as 3 extra, etc.
 	 */
 
@@ -45,7 +45,7 @@ var bingoList = {
 
 	// 2 room transitions away from a hub.
 	"arch_invis_anti": {"desc": "Nature - Arch invisible platforms anti cube", "diff": 3},
-	"lighthouse_obelisk_anti": {"desc": "Collect the lighthouse obelisk anti cube", "diff": 3}, 
+	"lighthouse_obelisk_anti": {"desc": "Collect the lighthouse obelisk anti cube", "diff": 3},
 	"bell_anti": {"desc": "Nature - Bell anti cube", "diff": 4}, // 1M
 	"waterfall_owl": {"desc": "Talk to the waterfall owl", "diff": 4}, // +1 for needing to make a cycle
 	"black_monolith_heart": {"desc": "Collect the black monolith heart piece", "diff": 7}, // +1 for two codes
@@ -75,10 +75,10 @@ var bingoList = {
 	// 6 room transitions away from a hub.
 	"waterfall_pump_map": {"desc": "Nature - Waterfall pump room map", "diff": 7, "types": ["single_map"]},
 	"sync_tuning_fork": {"desc": "Nature - Sync tuning fork anti cube", "diff": 7},
-	"qr_map": {"desc": "Tree - Get the QR map", "diff": 8, "types": ["single_map"], "excludes": ["qr_map_anti"]}, // 1M
-	"temple_obelisk_anti": {"desc": "Collect the temple obelisk anti cube", "diff": 8}, // 1M
+	"qr_map": {"desc": "Tree/Zu - Get the QR map", "diff": 8, "types": ["single_map"], "excludes": ["qr_map_anti"]}, // 1M
+	"temple_obelisk_anti": {"desc": "Tree/Zu - Collect the temple obelisk anti cube", "diff": 8}, // 1M
 	"qr_map_anti": {"desc": "Tree/Nature - QR map/Lighthouse owl room anti cube", "diff": 8}, // 1M
-	"zu_pathway_obelisk_anti": {"desc": "Collect the Zu pathway obelisk anti cube", "diff": 8}, // 1M
+	"zu_pathway_obelisk_anti": {"desc": "Tree/Zu - Collect the Zu pathway obelisk anti cube", "diff": 8}, // 1M
 	"tetris_anti": {"desc": "Nature - Tetris puzzle anti cube", "diff": 9}, // 1M, +1 for block puzzle
 	"tree_map": {"desc": "Tree - Key door map", "diff": 9, "types": ["single_map"]}, // 1M, +1 for needing key
 	"visit_zu": {"desc": "Visit the Zu hub room.", "diff": 10, "synergies": {"zu": -9}}, // 1M, +2 for being a hub
@@ -86,9 +86,9 @@ var bingoList = {
 	// 7 room transitions away from a hub.
 	"lighthouse_invis_anti": {"desc": "Nature - Lighthouse invisible platforms anti cube", "diff": 10}, // 1M, +1 for needing key
 	"visit_industrial": {"desc": "Visit the Industrial hub room.", "diff": 13, "synergies": {"industrial": -12}}, // 2M, +1 for needing key, +2 for being a hub
-	
+
 	// 8 room transitions away from a hub.
-	"cube_net_anti": {"desc": "Tree - Cube net puzzle anti cube", "diff": 11}, // 1M, +1 for block puzzle
+	"cube_net_anti": {"desc": "Tree/Zu - Cube net puzzle anti cube", "diff": 11}, // 1M, +1 for block puzzle
 
 	// 11 room transitions away from a hub.
 	"totem_anti": {"desc": "Nature - Totem pole puzzle anti cube", "diff": 15}, // 2M, +1 for block pluzzle
@@ -174,7 +174,7 @@ var bingoList = {
 
 	// 6 room transistions away from hub.
 	"windmill_cube": {"desc": "Industrial - Golden cube inside windmill", "diff": 20, "synergies": {"industrial": -12}}, // +1 for needing key
-	"pivot_cube": {"desc": "Industrial - Pivot golden cube (after windmill)", "diff": 20, "synergies": {"industrial": -12}},	
+	"pivot_cube": {"desc": "Industrial - Pivot golden cube (after windmill)", "diff": 20, "synergies": {"industrial": -12}},
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// SEWER HUB GOALS (BASE DIFFICULTY: 20)
@@ -186,7 +186,7 @@ var bingoList = {
 	"sew_pivot_cube": {"desc": "Sewers - Pivot puzzle golden cube", "diff": 21, "synergies": {"industrial": -12, "sewers": -6}},
 
 	// 2 room transistions away from hub.
-	
+
 	// 3 room transistions away from hub.
 	"lava_tuning_fork": {"desc": "Sewers - Lava tuning fork anti cube", "diff": 23, "synergies": {"industrial": -12, "sewers": -6}},
 	"sew_after_pillars_cube": {"desc": "Sewers - Golden cube after the pillars", "diff": 23, "synergies": {"industrial": -12, "sewers": -6}},
@@ -287,7 +287,7 @@ var bingoList = {
 	"1_tuning_forks": {"desc": "Collect any tuning fork anti cube", "diff": 6, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork"]},
 	"2_tuning_forks": {"desc": "Collect 2 tuning fork anti cubes", "diff": 9, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork"]},
 	"3_tuning_forks": {"desc": "Collect 3 tuning fork anti cubes", "diff": 24, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork"]},
-	"4_tuning_forks": {"desc": "Collect all 4 tuning fork anti cubes", "diff": 26, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork"]},
+	"4_tuning_forks": {"desc": "Collect all 4 tuning fork anti cubes", "diff": 26, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork", "4_anti"]},
 
 	"1_obelisk": {"desc": "Collect any obelisk anti cube", "diff": 2, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti"]},
 	"2_obelisk": {"desc": "Collect 2 obelisk anti cubes", "diff": 5, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti"]},
@@ -314,7 +314,6 @@ var bingoList = {
 	// MISC
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	"perfectly_balanced": {"desc": "Finish the run with the same number of golden cubes and anti cubes (excluding bits)", "diff": 20, "types": ["end_goals"]},
-	"no_warps": {"desc": "Finish the run without using any warp gates or little gates", "diff": 15, "types": ["end_goals"], "excludes": ["sync_top_anti", "clock_cube", "lava_anti"]},
-	"owl_anti": {"desc": "Collect the owl room anti cube", "diff": 25, "types": ["num_owls"], "excludes": ["waterfall_owl", "tree_owl", "zu_owl", "industrial_owl"]},
+	"perfectly_balanced": {"desc": "Finish the run with the same number of golden cubes and anti cubes (excluding bits)", "diff": 5, "types": ["end_goals"]},
+	"owl_anti": {"desc": "Collect the owl room anti cube (in graveyard)", "diff": 25, "types": ["num_owls"], "excludes": ["waterfall_owl", "tree_owl", "zu_owl", "industrial_owl"]},
 }
