@@ -29,7 +29,16 @@ bingoGenerator = function(bingoList, opts)
 	let diffSums
 	let metTarget = false
 
-	if (opts.blackout) 
+	if (opts.noEndGoals)
+	{
+		bingoList.bingoTypes.end_goals.max = 0
+	}
+	else
+	{
+		bingoList.bingoTypes.end_goals.max = 1
+	}
+
+	if (opts.blackout)
 	{
 		for (let i = 0; i < 100; i++)
 		{
@@ -73,9 +82,9 @@ bingoGenerator = function(bingoList, opts)
 			console.log(diffSums)
 			console.log("Max: ", Math.max(...diffSums))
 			console.log("Min: ", Math.min(...diffSums))
-		}	
+		}
 	}
-	
+
 	if (!metTarget)
 	{
 		console.log("WARNING: Board did not meet requirements.")

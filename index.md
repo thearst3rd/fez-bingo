@@ -14,6 +14,8 @@ Enjoy!
 	<label for="bingo-mode-normal">Normal</label><br>
 	<input id="bingo-mode-blackout" type="radio" value="Blackout" name="bingo-mode">
 	<label for="bingo-mode-blackout">Blackout</label><br>
+	<input id="option-end-goals" type="checkbox" name="option-end-goals">
+	<label for="option-end-goals">Allow "Finish the run with..." goals</label><br>
 </div>
 <div>
 	<input id="generate-button" type="button" value="Generate New Board"/>
@@ -28,6 +30,7 @@ Enjoy!
 <script>
 	const seedText = document.getElementById("seed-text")
 	const blackoutMode = document.getElementById("bingo-mode-blackout")
+	const optionEndGoals = document.getElementById("option-end-goals")
 	const generateButton = document.getElementById("generate-button")
 	const outputTextarea = document.getElementById("output-textarea")
 	const copyButton = document.getElementById("copy-button")
@@ -37,7 +40,9 @@ Enjoy!
 		// Generate board
 		let opts = {}
 		if (blackoutMode.checked)
-		opts.blackout = true
+			opts.blackout = true
+		if (!optionEndGoals.checked)
+			opts.noEndGoals = true
 		if (seedText.value.length > 0)
 		{
 			let seed = parseInt(seedText.value)
