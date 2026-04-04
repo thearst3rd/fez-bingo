@@ -6,6 +6,7 @@ var bingoList = {
 		"num_golden": {"max": 1},
 		"num_anti": {"max": 1},
 		"num_cubes": {"max": 1},
+		"num_hearts": {"max": 1},
 		"num_keys": {"max": 1},
 		"num_maps": {"max": 1},
 		"num_artifacts": {"max": 1},
@@ -253,7 +254,7 @@ var bingoList = {
 
 	"visit_nocturne": {"desc": "Visit the Nocturne area", "diff": 8},
 	"classroom_anti": {"desc": "Nocturne - Classroom anti cube", "diff": 9, "excludes": ["visit_nocturne"]},
-	"complete_nocturne": {"desc": "Fully complete the Nocturne area (including all sub rooms)", "diff": 12, "excludes": ["visit_nocturne"]},
+	"complete_nocturne": {"desc": "Fully complete the Nocturne area (including all sub rooms)", "diff": 12, "excludes": ["visit_nocturne", "classroom_anti"]},
 
 	"visit_old_zu": {"desc": "Visit Old Zu", "diff": 16},
 	"complete_old_zu": {"desc": "Fully complete Old Zu (including all sub rooms except the 32 cube door)", "diff": 21, "excludes": ["visit_old_zu"]},
@@ -292,11 +293,11 @@ var bingoList = {
 	"1_obelisk": {"desc": "Collect any obelisk anti cube", "diff": 2, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti"]},
 	"2_obelisk": {"desc": "Collect 2 obelisk anti cubes", "diff": 5, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti"]},
 	"3_obelisk": {"desc": "Collect 3 obelisk anti cubes", "diff": 9, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti"]},
-	"4_obelisk": {"desc": "Collect all 4 obelisk anti cubes", "diff": 10, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti"]},
+	"4_obelisk": {"desc": "Collect all 4 obelisk anti cubes", "diff": 10, "types": ["num_obelisks"], "excludes": ["tree_obelisk_anti", "lighthouse_obelisk_anti", "temple_obelisk_anti", "zu_pathway_obelisk_anti", "4_anti"]},
 
-	"1_heart": {"desc": "Collect any heart piece", "diff": 6, "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
-	"2_heart": {"desc": "Collect 2 heart pieces", "diff": 8, "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
-	"3_heart": {"desc": "Collect all 3 heart pieces", "diff": 16, "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
+	"1_heart": {"desc": "Collect any heart piece", "diff": 6, "types": ["num_hearts"], "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
+	"2_heart": {"desc": "Collect 2 heart pieces", "diff": 8, "types": ["num_hearts"], "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
+	"3_heart": {"desc": "Collect all 3 heart pieces", "diff": 16, "types": ["num_hearts"], "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
 
 	"3_key": {"desc": "Have 3 keys in your inventory at the same time", "diff": 11, "types": ["num_keys"]},
 	"4_key": {"desc": "Have 4 keys in your inventory at the same time", "diff": 17, "types": ["num_keys"]},
