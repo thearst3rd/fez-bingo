@@ -141,8 +141,8 @@ var bingoList = {
 
 	// 4 room transistions away from hub.
 	"complete_graveyard_top_room": {"desc": "Graveyard - Complete room at top of mausoleum", "diff": 13, "synergies": {"graveyard": -8}},
-	"grave_lesser_gate_cube": {"desc": "Graveyard - Lesser gate golden cube (middle floating island)", "diff": 14, "synergies": {"graveyard": -8}}, // 1M
-	"grave_treasure_cube": {"desc": "Graveyard - Treasure golden cube (top floating island)", "diff": 15, "synergies": {"graveyard": -8}}, // 1L
+	"grave_treasure_cube": {"desc": "Graveyard - Treasure golden cube (middle floating island)", "diff": 14, "synergies": {"graveyard": -8}}, // 1M
+	"grave_lesser_gate_cube": {"desc": "Graveyard - Lesser gate golden cube (top floating island)", "diff": 15, "synergies": {"graveyard": -8}}, // 1L
 
 	// 5 room transistions away from hub.
 
