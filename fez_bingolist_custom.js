@@ -31,7 +31,7 @@ var bingoList = {
 	 */
 
 	// Found in village.
-	"monocle_anti": {"desc": "Village - Monocle room anti cube", "diff": 1},
+	"monocle_anti": {"desc": "Village - Monocle room anti cube/Zu - QR wall anti cube", "diff": 1},
 	"achievement_anti": {"desc": "Achievement code anti cube", "diff": 1},
 	"boiler_anti": {"desc": "Village - Boiler room anti cube", "diff": 2},
 	"boiler_map": {"desc": "Village - Boiler room map", "diff": 2, "types": ["single_map"]},
@@ -45,10 +45,10 @@ var bingoList = {
 
 	// 2 room transitions away from a hub.
 	"arch_invis_anti": {"desc": "Nature - Arch invisible platforms anti cube", "diff": 3},
-	"lighthouse_obelisk_anti": {"desc": "Collect the lighthouse obelisk anti cube", "diff": 3},
+	"lighthouse_obelisk_anti": {"desc": "Nature - Lighthouse obelisk anti cube", "diff": 3},
 	"bell_anti": {"desc": "Nature - Bell anti cube", "diff": 4}, // 1M
-	"waterfall_owl": {"desc": "Talk to the waterfall owl", "diff": 4}, // +1 for needing to make a cycle
-	"black_monolith_heart": {"desc": "Collect the black monolith heart piece", "diff": 7}, // +1 for two codes
+	"waterfall_owl": {"desc": "Nature - Talk to the waterfall owl", "diff": 4}, // +1 for needing to make a cycle
+	"black_monolith_heart": {"desc": "Nature - Black monolith heart piece", "diff": 7}, // +1 for two codes
 
 	// 3 room transitions away from a hub.
 	"inf_fall_cube": {"desc": "Nature - Infinite fall golden cube", "diff": 4},
@@ -56,12 +56,12 @@ var bingoList = {
 	"glitch_anti": {"desc": "Nature - Glitch room anti cube", "diff": 8}, // 1M, +3 for water
 
 	// 4 room transitions away from a hub.
-	"tree_obelisk_anti": {"desc": "Collect the tree obelisk anti cube", "diff": 5},
-	"writing_artifact": {"desc": "Collect the writing artifact", "diff": 5},
+	"tree_obelisk_anti": {"desc": "Tree - Forest obelisk anti cube", "diff": 5},
+	"writing_artifact": {"desc": "Nature - Writing artifact", "diff": 5},
 	"lighthouse_map": {"desc": "Nature - Lighthouse map", "diff": 6, "types": ["single_map"]}, // +1 for needing key
-	"tree_owl": {"desc": "Talk to the tree owl", "diff": 6}, // +1 for needing cycle
+	"tree_owl": {"desc": "Tree - Talk to the cabin owl", "diff": 6}, // +1 for needing cycle
 	"mine_cube": {"desc": "Nature - Mine golden cube", "diff": 7}, // 1L
-	"security_heart": {"desc": "Collect the security question heart piece", "diff": 8}, // +3 for water
+	"security_heart": {"desc": "Nature - Security question heart piece", "diff": 8}, // +3 for water
 	"arch_secret_cube": {"desc": "Nature - Arch switch door golden cube", "diff": 9}, // +4 for having to carry blocks
 	"lighthouse_tuning_fork": {"desc": "Nature - Lighthouse tuning fork anti cube", "diff": 9}, // +3 for water, +1 for needing key
 	"sync_top_anti": {"desc": "Nature - Sync room top anti cube", "diff": 10}, // 1XL, 1L
@@ -69,23 +69,23 @@ var bingoList = {
 	// 5 room transitions away from a hub.
 	"arch_map": {"desc": "Nature - Arch cave map", "diff": 6, "types": ["single_map"]},
 	"bell_cube": {"desc": "Nature - Bell tower golden cube", "diff": 8}, // 2M
-	"visit_graveyard": {"desc": "Visit the Graveyard hub room.", "diff": 9, "synergies": {"graveyard": -8}}, // 1M, +2 for being a hub
+	"visit_graveyard": {"desc": "Visit the Graveyard hub room", "diff": 9, "synergies": {"graveyard": -8}}, // 1M, +2 for being a hub
 
 
 	// 6 room transitions away from a hub.
 	"waterfall_pump_map": {"desc": "Nature - Waterfall pump room map", "diff": 7, "types": ["single_map"]},
 	"sync_tuning_fork": {"desc": "Nature - Sync tuning fork anti cube", "diff": 7},
-	"qr_map": {"desc": "Tree/Zu - Get the QR map", "diff": 8, "types": ["single_map"], "excludes": ["qr_map_anti"]}, // 1M
-	"temple_obelisk_anti": {"desc": "Tree/Zu - Collect the temple obelisk anti cube", "diff": 8}, // 1M
-	"qr_map_anti": {"desc": "Tree/Nature - QR map/Lighthouse owl room anti cube", "diff": 8}, // 1M
-	"zu_pathway_obelisk_anti": {"desc": "Tree/Zu - Collect the Zu pathway obelisk anti cube", "diff": 8}, // 1M
+	"qr_map": {"desc": "Tree/Zu - QR map", "diff": 8, "types": ["single_map"], "excludes": ["qr_map_anti"]}, // 1M
+	"temple_obelisk_anti": {"desc": "Tree/Zu - Temple obelisk anti cube", "diff": 8}, // 1M
+	"qr_map_anti": {"desc": "Tree/Zu - QR map anti cube/Nature - Lighthouse owl room anti cube", "diff": 8}, // 1M
+	"zu_pathway_obelisk_anti": {"desc": "Tree/Zu - Zu pathway obelisk anti cube", "diff": 8}, // 1M
 	"tetris_anti": {"desc": "Nature - Tetris puzzle anti cube", "diff": 9}, // 1M, +1 for block puzzle
 	"tree_map": {"desc": "Tree - Key door map", "diff": 9, "types": ["single_map"]}, // 1M, +1 for needing key
-	"visit_zu": {"desc": "Visit the Zu hub room.", "diff": 10, "synergies": {"zu": -9}}, // 1M, +2 for being a hub
+	"visit_zu": {"desc": "Visit the Zu hub room", "diff": 10, "synergies": {"zu": -9}}, // 1M, +2 for being a hub
 
 	// 7 room transitions away from a hub.
 	"lighthouse_invis_anti": {"desc": "Nature - Lighthouse invisible platforms anti cube", "diff": 10}, // 1M, +1 for needing key
-	"visit_industrial": {"desc": "Visit the Industrial hub room.", "diff": 13, "synergies": {"industrial": -12}}, // 2M, +1 for needing key, +2 for being a hub
+	"visit_industrial": {"desc": "Visit the Industrial hub room", "diff": 13, "synergies": {"industrial": -12}}, // 2M, +1 for needing key, +2 for being a hub
 
 	// 8 room transitions away from a hub.
 	"cube_net_anti": {"desc": "Tree/Zu - Cube net puzzle anti cube", "diff": 11}, // 1M, +1 for block puzzle
@@ -102,17 +102,17 @@ var bingoList = {
 
 	// 2 room transitions away from a hub.
 	"qr_wall_anti": {"desc": "Zu - QR wall anti cube", "diff": 12, "synergies": {"zu": -9}},
-	"throne_anti": {"desc": "Zu - Throne room/Sewer QR room anti cube", "diff": 13, "synergies": {"zu": -9}}, // +1 for double length code
+	"throne_anti": {"desc": "Zu - Throne room anti cube/Sewers - QR room anti cube", "diff": 13, "synergies": {"zu": -9}}, // +1 for double length code
 	"observatory_cube": {"desc": "Zu - Golden cube by the observatory", "diff": 14, "synergies": {"zu": -9}}, // 1L
 	"clock_cube": {"desc": "Zu - Clock tower golden cube", "diff": 15, "synergies": {"zu": -9}}, // 1XL
 
 	// 3 room transitions away from a hub.
 	"squid_cube": {"desc": "Zu - Squid statue golden cube", "diff": 14, "synergies": {"zu": -9}}, // 1M
-	"zu_owl": {"desc": "Talk to the Zu owl", "diff": 15, "synergies": {"zu": -9}}, // 1M, +1 for needing a cycle
+	"zu_owl": {"desc": "Zu - Talk to the squid statue owl", "diff": 15, "synergies": {"zu": -9}}, // 1M, +1 for needing a cycle
 
 	// 4 room transitions away from a hub.
 	"observatory_anti": {"desc": "Zu - Observatory anti cube", "diff": 15, "synergies": {"zu": -9}}, // 1L
-	"observatory_heart": {"desc": "Collect the observatory heart piece", "diff": 15, "synergies": {"zu": -9}}, // 1 L
+	"observatory_heart": {"desc": "Zu - Observatory heart piece", "diff": 15, "synergies": {"zu": -9}}, // 1 L
 
 	// 5 room transitions away from a hub.
 	"rosetta_anti": {"desc": "Zu - Rosetta anti cube", "diff": 16, "synergies": {"zu": -9}}, // 1M
@@ -120,14 +120,14 @@ var bingoList = {
 	// 6 room transitions away from a hub.
 
 	// 7 room transitions away from a hub.
-	"number_artifact": {"desc": "Collect the number artifact", "diff": 18, "synergies": {"zu": -9}}, // 1M
+	"number_artifact": {"desc": "Zu - Number artifact", "diff": 18, "synergies": {"zu": -9}}, // 1M
 
 	// 8 room transitions away from a hub.
 
 	// 9 room transitions away from a hub.
 
 	// 10 room transitions away from a hub.
-	"tome_artifact": {"desc": "Collect the tome artifact", "diff": 22, "synergies": {"zu": -9}}, // 2M
+	"tome_artifact": {"desc": "Zu - Tome artifact", "diff": 22, "synergies": {"zu": -9}}, // 2M
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// GRAVEYARD HUB GOALS (BASE DIFFICULTY: 9)
@@ -153,14 +153,14 @@ var bingoList = {
 	// 8 room transistions away from hub.
 
 	// 9 room transistions away from hub.
-	"skull_artifact": {"desc": "Collect the skull artifact", "diff": 19, "synergies": {"graveyard": -8}}, // 1M
+	"skull_artifact": {"desc": "Graveyard - Skull artifact", "diff": 19, "synergies": {"graveyard": -8}}, // 1M
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// INDUSTRIAL HUB GOALS (BASE DIFFICULTY: 13)
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 2 room transistions away from hub.
-	"industrial_owl": {"desc": "Talk to the Industrial owl", "diff": 16, "synergies": {"industrial": -12}}, // +1 for needing cycle
+	"industrial_owl": {"desc": "Industrial - Talk to the windmill owl", "diff": 16, "synergies": {"industrial": -12}}, // +1 for needing cycle
 	"industrial_map": {"desc": "Industrial - Superspin map", "diff": 17, "synergies": {"industrial": -12}, "types": ["single_map"]}, // 1L
 
 	// 3 room transistions away from hub.
@@ -168,7 +168,7 @@ var bingoList = {
 
 	// 4 room transistions away from hub.
 	"spin_plates_cube": {"desc": "Industrial - Elevator/Spinning plates golden cube", "diff": 24, "synergies": {"industrial": -12}}, // 2XL, 1L
-	"visit_sewers": {"desc": "Visit the Sewers hub room.", "diff": 20, "synergies": {"industrial": -12, "sewers": -6}}, // 1M, +1 for needing key
+	"visit_sewers": {"desc": "Visit the Sewers hub room", "diff": 20, "synergies": {"industrial": -12, "sewers": -6}}, // 1M, +1 for needing key
 
 	// 5 room transistions away from hub.
 
@@ -248,7 +248,7 @@ var bingoList = {
 	// MEMORY CORE GOALS
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	"early_flatland": {"desc": "Enter the Flatland area before the Nature hub.", "diff": 5, "excludes": ["complete_flatland"]},
+	"early_flatland": {"desc": "Enter the Flatland area before the Nature hub", "diff": 5, "excludes": ["complete_flatland"]},
 	"complete_flatland": {"desc": "Fully complete the Flatland area (including all sub rooms)", "diff": 10},
 
 	"visit_nocturne": {"desc": "Visit the Nocturne area", "diff": 8},
@@ -256,7 +256,7 @@ var bingoList = {
 	"complete_nocturne": {"desc": "Fully complete the Nocturne area (including all sub rooms)", "diff": 12, "excludes": ["visit_nocturne"]},
 
 	"visit_old_zu": {"desc": "Visit Old Zu", "diff": 16},
-	"complete_old_zu": {"desc": "Fully complete Old Zu (including all sub rooms)", "diff": 21, "excludes": ["visit_old_zu"]},
+	"complete_old_zu": {"desc": "Fully complete Old Zu (including all sub rooms except the 32 cube door)", "diff": 21, "excludes": ["visit_old_zu"]},
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// VARIOUS NUMBERED GOALS
@@ -282,7 +282,7 @@ var bingoList = {
 	"4_map": {"desc": "Collect 4 maps", "diff": 9, "types": ["num_maps"], "excludes": ["boiler_map", "lighthouse_map", "waterfall_pump_map", "arch_map", "tree_map", "qr_map", "zu_map", "graveyard_map", "insudtrial_map"]},
 	"5_map": {"desc": "Collect 5 maps", "diff": 13, "types": ["num_maps"], "excludes": ["boiler_map", "lighthouse_map", "waterfall_pump_map", "arch_map", "tree_map", "qr_map", "zu_map", "graveyard_map", "insudtrial_map"]},
 	"6_map": {"desc": "Collect 6 maps", "diff": 17, "types": ["num_maps"], "excludes": ["boiler_map", "lighthouse_map", "waterfall_pump_map", "arch_map", "tree_map", "qr_map", "zu_map", "graveyard_map", "insudtrial_map"]},
-	"skull_map": {"desc": "Collect all 4 pieces of the skull map puzzle", "diff": 15, "types": ["num_maps"], "excludes": ["boiler_map", "arch_map", "tree_map", "graveyard_map"]},
+	"skull_map": {"desc": "Collect all 4 crypt puzzle maps", "diff": 15, "types": ["num_maps"], "excludes": ["boiler_map", "arch_map", "tree_map", "graveyard_map"]},
 
 	"1_tuning_forks": {"desc": "Collect any tuning fork anti cube", "diff": 6, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork"]},
 	"2_tuning_forks": {"desc": "Collect 2 tuning fork anti cubes", "diff": 9, "types": ["num_tuningforks"], "excludes": ["lighthouse_tuning_fork", "sync_tuning_fork", "sewer_tuning_fork", "lava_tuning_fork"]},
@@ -298,7 +298,7 @@ var bingoList = {
 	"2_heart": {"desc": "Collect 2 heart pieces", "diff": 8, "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
 	"3_heart": {"desc": "Collect all 3 heart pieces", "diff": 16, "excludes": ["black_monolith_heart", "security_heart", "observatory_heart"]},
 
-	"3_keys": {"desc": "Have 3 keys in your inventory at the same time", "diff": 11, "types": ["num_keys"]},
+	"3_key": {"desc": "Have 3 keys in your inventory at the same time", "diff": 11, "types": ["num_keys"]},
 	"4_key": {"desc": "Have 4 keys in your inventory at the same time", "diff": 17, "types": ["num_keys"]},
 
 	"3_hub": {"desc": "Visit 3 hubs", "diff": 11, "types": ["num_hubs"], "excludes": ["visit_zu", "visit_graveyard", "visit_industrial", "visit_sewers"]},
@@ -315,5 +315,5 @@ var bingoList = {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//"perfectly_balanced": {"desc": "Finish the run with the same number of golden cubes and anti cubes (excluding bits)", "diff": 5, "types": ["end_goals"]},
-	"owl_anti": {"desc": "Collect the owl room anti cube (in graveyard)", "diff": 25, "types": ["num_owls"], "excludes": ["waterfall_owl", "tree_owl", "zu_owl", "industrial_owl"]},
+	"owl_anti": {"desc": "Graveyard - 4 Owls anti cube", "diff": 25, "types": ["num_owls"], "excludes": ["waterfall_owl", "tree_owl", "zu_owl", "industrial_owl"]},
 }
