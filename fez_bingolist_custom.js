@@ -197,14 +197,14 @@ var bingoList = {
 	// CUBE GOALS
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	"0_bits": {"desc": "Finish the run with 0 bits collected", "diff": 1, "types": ["end_goals"]},
-	"1_bits": {"desc": "Finish the run with 1 bits collected", "diff": 1, "types": ["end_goals"]},
-	"2_bits": {"desc": "Finish the run with 2 bits collected", "diff": 2, "types": ["end_goals"]},
-	"3_bits": {"desc": "Finish the run with 3 bits collected", "diff": 2, "types": ["end_goals"]},
-	"4_bits": {"desc": "Finish the run with 4 bits collected", "diff": 3, "types": ["end_goals"]},
-	"5_bits": {"desc": "Finish the run with 5 bits collected", "diff": 3, "types": ["end_goals"]},
-	"6_bits": {"desc": "Finish the run with 6 bits collected", "diff": 4, "types": ["end_goals"]},
-	"7_bits": {"desc": "Finish the run with 7 bits collected", "diff": 4, "types": ["end_goals"]},
+	//"0_bits": {"desc": "Finish the run with 0 bits collected", "diff": 1, "types": ["end_goals"]},
+	//"1_bits": {"desc": "Finish the run with 1 bits collected", "diff": 1, "types": ["end_goals"]},
+	//"2_bits": {"desc": "Finish the run with 2 bits collected", "diff": 2, "types": ["end_goals"]},
+	//"3_bits": {"desc": "Finish the run with 3 bits collected", "diff": 2, "types": ["end_goals"]},
+	//"4_bits": {"desc": "Finish the run with 4 bits collected", "diff": 3, "types": ["end_goals"]},
+	//"5_bits": {"desc": "Finish the run with 5 bits collected", "diff": 3, "types": ["end_goals"]},
+	//"6_bits": {"desc": "Finish the run with 6 bits collected", "diff": 4, "types": ["end_goals"]},
+	//"7_bits": {"desc": "Finish the run with 7 bits collected", "diff": 4, "types": ["end_goals"]},
 
 	"4_golden": {"desc": "Collect 4 golden cubes", "diff": 9, "types": ["num_golden"]},
 	"5_golden": {"desc": "Collect 5 golden cubes", "diff": 10, "types": ["num_golden"], "excludes": ["5_cube"]},
@@ -314,6 +314,6 @@ var bingoList = {
 	// MISC
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	"perfectly_balanced": {"desc": "Finish the run with the same number of golden cubes and anti cubes (excluding bits)", "diff": 5, "types": ["end_goals"]},
+	//"perfectly_balanced": {"desc": "Finish the run with the same number of golden cubes and anti cubes (excluding bits)", "diff": 5, "types": ["end_goals"]},
 	"owl_anti": {"desc": "Collect the owl room anti cube (in graveyard)", "diff": 25, "types": ["num_owls"], "excludes": ["waterfall_owl", "tree_owl", "zu_owl", "industrial_owl"]},
 }

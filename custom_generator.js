@@ -23,20 +23,16 @@ bingoGenerator = function(bingoList, opts)
 		types[key] = bingoTypes[key].max
 	}
 
+	//if (opts.noEndGoals)
+	//{
+	//	types["end_goals"] = 0
+	//}
+
 	let scoreTarget = 60
 
 	let board
 	let diffSums
 	let metTarget = false
-
-	if (opts.noEndGoals)
-	{
-		bingoList.bingoTypes.end_goals.max = 0
-	}
-	else
-	{
-		bingoList.bingoTypes.end_goals.max = 1
-	}
 
 	if (opts.blackout)
 	{
